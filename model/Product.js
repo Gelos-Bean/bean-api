@@ -20,7 +20,8 @@ const productSchema = new Schema({
 
         Otherwise, there could just be an algorithm for *.price =+ *.options.price.Sum() or something.
         */
-    }]
+    }],
+    image: [{ type: String, required: false }]
 },{ timestamps: true });
 
 const Product = model('Product', productSchema);
