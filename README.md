@@ -1,8 +1,9 @@
 # Bean Scene POS Server
 
 __Author:__  
-Ben Kindon  
-Nicole Birch  
+- Ben Kindon  
+- Nicole Birch  
+
 __Version:__ 0.0.1
 
 ---
