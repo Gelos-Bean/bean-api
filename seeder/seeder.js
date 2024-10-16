@@ -14,7 +14,7 @@ export default async function Seeder(){
                     options: item.options,
                     image: item.image,
                 }, {timestamps: item.timestamps});
-                console.log(addprod);
+                addprod.save();
             }
             console.log('Database successfully seeded');
         }
