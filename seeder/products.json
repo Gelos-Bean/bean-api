@@ -2,7 +2,6 @@
   {
       "name": "Margherita Pizza",
       "price": 12.99,
-      "category": "Kitchen",
       "course": "Main",
       "options": [
           { "description": "Extra Cheese", "price": 1.5 },
@@ -13,7 +12,6 @@
   {
       "name": "Caesar Salad",
       "price": 8.49,
-      "category": "Kitchen",
       "course": "Appetizer",
       "options": [
           { "description": "Add Chicken", "price": 2.5 }
@@ -23,7 +21,6 @@
   {
       "name": "Spaghetti Carbonara",
       "price": 13.99,
-      "category": "Kitchen",
       "course": "Main",
       "options": [
           { "description": "Extra Parmesan", "price": 0.75 }
@@ -33,7 +30,6 @@
   {
       "name": "Tiramisu",
       "price": 6.49,
-      "category": "Kitchen",
       "course": "Dessert",
       "options": [],
       "image": "tiramisu.jpg"
@@ -41,7 +37,7 @@
   {
       "name": "Cappuccino",
       "price": 3.99,
-      "category": "Bar",
+      "course": "Beverages",
       "options": [
           { "description": "Add Extra Shot", "price": 1.0 },
           { "description": "Oat Milk", "price": 0.5 }
@@ -51,14 +47,13 @@
   {
       "name": "Espresso Martini",
       "price": 9.99,
-      "category": "Bar",
+      "course": "Beverages",
       "options": [],
       "image": "espresso_martini.jpg"
   },
   {
       "name": "Chicken Tacos",
       "price": 10.99,
-      "category": "Kitchen",
       "course": "Main",
       "options": [
           { "description": "Add Guacamole", "price": 1.5 },
@@ -69,7 +64,7 @@
   {
       "name": "Lemonade",
       "price": 2.99,
-      "category": "Bar",
+      "course": "Beverages",
       "options": [
           { "description": "Add Mint", "price": 0.5 }
       ],
@@ -78,7 +73,6 @@
   {
       "name": "Beef Burger",
       "price": 11.99,
-      "category": "Kitchen",
       "course": "Main",
       "options": [
           { "description": "Add Bacon", "price": 2.0 },
@@ -89,7 +83,7 @@
   {
       "name": "Iced Tea",
       "price": 2.49,
-      "category": "Bar",
+      "course": "Beverages",
       "options": [
           { "description": "Add Lemon", "price": 0.25 }
       ],
@@ -98,7 +92,6 @@
   {
       "name": "Buffalo Wings",
       "price": 9.99,
-      "category": "Kitchen",
       "course": "Appetizer",
       "options": [
           { "description": "Add Ranch Sauce", "price": 0.75 }
@@ -108,7 +101,7 @@
   {
       "name": "Mojito",
       "price": 8.99,
-      "category": "Bar",
+      "course": "Beverages",
       "options": [
           { "description": "Add Extra Rum", "price": 2.0 }
       ],
@@ -117,7 +110,6 @@
   {
       "name": "Greek Salad",
       "price": 7.99,
-      "category": "Kitchen",
       "course": "Appetizer",
       "options": [],
       "image": "greek_salad.jpg"
@@ -125,7 +117,7 @@
   {
       "name": "Orange Juice",
       "price": 3.49,
-      "category": "Bar",
+      "course": "Beverages",
       "options": [
           { "description": "Add Ice", "price": 0.25 }
       ],
@@ -134,7 +126,6 @@
   {
       "name": "Grilled Salmon",
       "price": 17.99,
-      "category": "Kitchen",
       "course": "Main",
       "options": [
           { "description": "Add Lemon Butter", "price": 1.5 }
@@ -144,7 +135,6 @@
   {
       "name": "Panna Cotta",
       "price": 5.99,
-      "category": "Kitchen",
       "course": "Dessert",
       "options": [],
       "image": "panna_cotta.jpg"
@@ -152,7 +142,7 @@
   {
       "name": "Margarita",
       "price": 7.99,
-      "category": "Bar",
+      "course": "Beverages",
       "options": [
           { "description": "Add Salt Rim", "price": 0.5 }
       ],
@@ -161,7 +151,6 @@
   {
       "name": "Vegetable Stir Fry",
       "price": 10.99,
-      "category": "Kitchen",
       "course": "Main",
       "options": [
           { "description": "Add Tofu", "price": 1.5 }
@@ -171,7 +160,7 @@
   {
       "name": "Pina Colada",
       "price": 8.49,
-      "category": "Bar",
+      "course": "Beverages",
       "options": [
           { "description": "Add Pineapple Slice", "price": 0.75 }
       ],

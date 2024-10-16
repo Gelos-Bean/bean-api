@@ -6,19 +6,16 @@ export default async function Seeder(){
         const alreadySeededCheck = await Product.findOne(); 
     
         if(!alreadySeededCheck){
-            items.map(item => { 
+            for (const item of items){
                 const addprod = new Product({
                     name: item.name,
                     price: item.price, 
-                    category: item.category,
-                    options: item.options.map(option => ({
-                        description: option.description,
-                        price: option.price
-                    })),
+                    course: item.course,
+                    options: item.options,
                     image: item.image,
                 }, {timestamps: item.timestamps});
-                addprod.save();
-            })
+                console.log(addprod);
+            }
             console.log('Database successfully seeded');
         }
     } catch(err) { 
