@@ -12,3 +12,4 @@ __Version:__ 0.0.1
 1. Install [node.js](https://nodejs.org/en)
 2. In terminal run `npm install`
 3. To test run `npm run dev`
+4. Run `npm install mongoose dotenv`

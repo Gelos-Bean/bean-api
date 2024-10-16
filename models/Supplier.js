@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 const {Schema, model} = mongoose;
 
+//Ignore for now
+
 const supplierSchema = new Schema({
     name: { type: String, required:true },
     email: { type: String, required:true },

@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 const {Schema, model} = mongoose;
 
+//Ignore for now
+
 const inventorySchema = new Schema({
     name: { type: String, required: true },
     perishable: { type: Boolean, required: true },

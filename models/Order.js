@@ -1,9 +1,14 @@
 import mongoose from "mongoose";
-const {Schema, model} = mongoose;
+const {Schema, SchemaTypes, model} = mongoose;
 
 const orderSchema = new Schema({
+    table: {
+        type: SchemaTypes.ObjectId, 
+        ref: 'Table' },
     products: [{
-        item: { type: Schema.Types.ObjectId, ref: 'Product' }, //I think that this is a zero-many, as the array is extensible but required is set to false
+        item: { 
+            type: SchemaTypes.ObjectId, 
+            ref: 'Product' }, //I think that this is a zero-many, as the array is extensible but required is set to false
         quantity: { type: Number},
         isSent: { type: Boolean }
     }],

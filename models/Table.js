@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 const {Schema, model} = mongoose;
 
-import Product from "./Product"; //I don't reckon this is required but leaving it in this file only for reference
-
 const tableSchema = new Schema({
     tableNo: { type: Number, required: true,  unique: true}, //Must ALSO handle unique field validation in application logic
     isOpen: { type: Boolean, required: true }, //I question if this is required in the DB - can be calculated client-side?

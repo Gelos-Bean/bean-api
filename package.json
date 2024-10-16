@@ -8,6 +8,7 @@
     "run": "node app.js",
     "dev": "nodemon app.js"
   },
+  "type": "module",
   "author": "Ben Kindon, Nicole Birch",
   "license": "ISC",
   "dependencies": {
