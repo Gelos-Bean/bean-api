@@ -6,10 +6,10 @@ const productSchema = new Schema({
     price: { type: Number, required: true },
     category: { type: String, required: false }, //Eg: Kitchen or Bar, dictates the Order screen to dispay to
     course: { type: String, required: false }, //Eg: Entree, not required for Bar products
-    inventory: [{
+    /*inventory: [{
         item: { type: Schema.Types.ObjectId, ref: 'Inventory' },
         quantityNeeded: { type: Number }
-    }],
+    }],*/
     options: [{
         description: { type: String },
         price: { type: Number }
@@ -21,7 +21,7 @@ const productSchema = new Schema({
         Otherwise, there could just be an algorithm for *.price =+ *.options.price.Sum() or something.
         */
     }],
-    image: [{ type: String, required: false }]
+    image: { type: String, required: false }
 },{ timestamps: true });
 
 const Product = model('Product', productSchema);
