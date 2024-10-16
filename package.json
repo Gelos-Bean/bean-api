@@ -2,6 +2,7 @@
   "name": "bean-scene",
   "version": "1.0.0",
   "description": "Bean-Scene POS API",
+  "type": "module",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

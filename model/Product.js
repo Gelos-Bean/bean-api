@@ -1,10 +1,10 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 const {Schema, model} = mongoose;
 
 const productSchema = new Schema({
     name: { type: String, required: true },
     price: { type: Number, required: true },
-    category: { type: String, required: true }, //Eg: Kitchen or Bar, dictates the Order screen to dispay to
+    category: { type: String, required: false }, //Eg: Kitchen or Bar, dictates the Order screen to dispay to
     course: { type: String, required: false }, //Eg: Entree, not required for Bar products
     inventory: [{
         item: { type: Schema.Types.ObjectId, ref: 'Inventory' },
