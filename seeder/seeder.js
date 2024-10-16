@@ -11,17 +11,15 @@ export default async function Seeder(){
                     name: item.name,
                     price: item.price, 
                     category: item.category,
-                    options: [{
-                        description: item.description, 
-                        price: item.price
-                    }],
-                    //image: item.image,
-                },{timestamps: item.timestamps});
+                    options: item.options.map(option => ({
+                        description: option.description,
+                        price: option.price
+                    })),
+                    image: item.image,
+                }, {timestamps: item.timestamps});
                 addprod.save();
             })
             console.log('Database successfully seeded');
-        } else {
-            console.log('Database already seeded');
         }
     } catch(err) { 
         console.log(`Error in seeding process: ${err}`);

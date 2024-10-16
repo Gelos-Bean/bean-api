@@ -4,9 +4,6 @@
       "price": 12.99,
       "category": "Kitchen",
       "course": "Main",
-      "inventory": [
-          { "item": "64b7f9c9674d1d246f985001", "quantityNeeded": 1 }
-      ],
       "options": [
           { "description": "Extra Cheese", "price": 1.5 },
           { "description": "Gluten-Free Crust", "price": 2.0 }
@@ -18,9 +15,6 @@
       "price": 8.49,
       "category": "Kitchen",
       "course": "Appetizer",
-      "inventory": [
-          { "item": "64b7f9c9674d1d246f985002", "quantityNeeded": 1 }
-      ],
       "options": [
           { "description": "Add Chicken", "price": 2.5 }
       ],
@@ -31,9 +25,6 @@
       "price": 13.99,
       "category": "Kitchen",
       "course": "Main",
-      "inventory": [
-          { "item": "64b7f9c9674d1d246f985003", "quantityNeeded": 1 }
-      ],
       "options": [
           { "description": "Extra Parmesan", "price": 0.75 }
       ],
@@ -44,9 +35,6 @@
       "price": 6.49,
       "category": "Kitchen",
       "course": "Dessert",
-      "inventory": [
-          { "item": "64b7f9c9674d1d246f985004", "quantityNeeded": 1 }
-      ],
       "options": [],
       "image": "tiramisu.jpg"
   },
@@ -54,9 +42,6 @@
       "name": "Cappuccino",
       "price": 3.99,
       "category": "Bar",
-      "inventory": [
-          { "item": "64b7f9c9674d1d246f985005", "quantityNeeded": 1 }
-      ],
       "options": [
           { "description": "Add Extra Shot", "price": 1.0 },
           { "description": "Oat Milk", "price": 0.5 }
@@ -67,9 +52,6 @@
       "name": "Espresso Martini",
       "price": 9.99,
       "category": "Bar",
-      "inventory": [
-          { "item": "64b7f9c9674d1d246f985006", "quantityNeeded": 1 }
-      ],
       "options": [],
       "image": "espresso_martini.jpg"
   },
@@ -78,9 +60,6 @@
       "price": 10.99,
       "category": "Kitchen",
       "course": "Main",
-      "inventory": [
-          { "item": "64b7f9c9674d1d246f985007", "quantityNeeded": 1 }
-      ],
       "options": [
           { "description": "Add Guacamole", "price": 1.5 },
           { "description": "Extra Salsa", "price": 0.5 }
@@ -91,9 +70,6 @@
       "name": "Lemonade",
       "price": 2.99,
       "category": "Bar",
-      "inventory": [
-          { "item": "64b7f9c9674d1d246f985008", "quantityNeeded": 1 }
-      ],
       "options": [
           { "description": "Add Mint", "price": 0.5 }
       ],
@@ -104,9 +80,6 @@
       "price": 11.99,
       "category": "Kitchen",
       "course": "Main",
-      "inventory": [
-          { "item": "64b7f9c9674d1d246f985009", "quantityNeeded": 1 }
-      ],
       "options": [
           { "description": "Add Bacon", "price": 2.0 },
           { "description": "Extra Cheese", "price": 1.0 }
@@ -117,9 +90,6 @@
       "name": "Iced Tea",
       "price": 2.49,
       "category": "Bar",
-      "inventory": [
-          { "item": "64b7f9c9674d1d246f985010", "quantityNeeded": 1 }
-      ],
       "options": [
           { "description": "Add Lemon", "price": 0.25 }
       ],
@@ -130,9 +100,6 @@
       "price": 9.99,
       "category": "Kitchen",
       "course": "Appetizer",
-      "inventory": [
-          { "item": "64b7f9c9674d1d246f985011", "quantityNeeded": 1 }
-      ],
       "options": [
           { "description": "Add Ranch Sauce", "price": 0.75 }
       ],
@@ -142,9 +109,6 @@
       "name": "Mojito",
       "price": 8.99,
       "category": "Bar",
-      "inventory": [
-          { "item": "64b7f9c9674d1d246f985012", "quantityNeeded": 1 }
-      ],
       "options": [
           { "description": "Add Extra Rum", "price": 2.0 }
       ],
@@ -155,9 +119,6 @@
       "price": 7.99,
       "category": "Kitchen",
       "course": "Appetizer",
-      "inventory": [
-          { "item": "64b7f9c9674d1d246f985013", "quantityNeeded": 1 }
-      ],
       "options": [],
       "image": "greek_salad.jpg"
   },
@@ -165,9 +126,6 @@
       "name": "Orange Juice",
       "price": 3.49,
       "category": "Bar",
-      "inventory": [
-          { "item": "64b7f9c9674d1d246f985014", "quantityNeeded": 1 }
-      ],
       "options": [
           { "description": "Add Ice", "price": 0.25 }
       ],
@@ -178,9 +136,6 @@
       "price": 17.99,
       "category": "Kitchen",
       "course": "Main",
-      "inventory": [
-          { "item": "64b7f9c9674d1d246f985015", "quantityNeeded": 1 }
-      ],
       "options": [
           { "description": "Add Lemon Butter", "price": 1.5 }
       ],
@@ -191,9 +146,6 @@
       "price": 5.99,
       "category": "Kitchen",
       "course": "Dessert",
-      "inventory": [
-          { "item": "64b7f9c9674d1d246f985016", "quantityNeeded": 1 }
-      ],
       "options": [],
       "image": "panna_cotta.jpg"
   },
@@ -201,9 +153,6 @@
       "name": "Margarita",
       "price": 7.99,
       "category": "Bar",
-      "inventory": [
-          { "item": "64b7f9c9674d1d246f985017", "quantityNeeded": 1 }
-      ],
       "options": [
           { "description": "Add Salt Rim", "price": 0.5 }
       ],
@@ -214,9 +163,6 @@
       "price": 10.99,
       "category": "Kitchen",
       "course": "Main",
-      "inventory": [
-          { "item": "64b7f9c9674d1d246f985018", "quantityNeeded": 1 }
-      ],
       "options": [
           { "description": "Add Tofu", "price": 1.5 }
       ],
@@ -226,9 +172,6 @@
       "name": "Pina Colada",
       "price": 8.49,
       "category": "Bar",
-      "inventory": [
-          { "item": "64b7f9c9674d1d246f985019", "quantityNeeded": 1 }
-      ],
       "options": [
           { "description": "Add Pineapple Slice", "price": 0.75 }
       ],
