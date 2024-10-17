@@ -1,6 +1,6 @@
-import items from './products.json' with { type: "json" };
-import tables  from './tables.json' with { type: "json" };
-import orders from './orders.json' with { type: "json" };
+import items from './products.json' assert { type: "json" };
+import tables  from './tables.json' assert { type: "json" };
+import orders from './orders.json' assert { type: "json" };
 
 import Product from '../models/Product.js';
 import Table from '../models/Table.js';
@@ -24,16 +24,36 @@ export default async function Seeder(){
                 }, {timestamps: item.timestamps});
                 addprod.save();
             }
-            console.log('Database successfully seeded');
+            console.log('DB Product successfully seeded');
+        }
+        if(!TableCheck){
+            for (const table of tables){
+                const addTable = new Table({
+                    tableNo: table.tableNo, 
+                    isOpen: table.isOpen, 
+                    openedAt: table.openedAt,
+                    pax: table.pax, 
+                    name: table.name, 
+                    limit: table.limit, 
+                    comment: table.comment, 
+                    products: table.products, 
+                    total: table.products
+                });
+                addTable.save();
+            }
+            console.log('DB Table successfully seeded');
         }
         if (!OrderCheck){
             for (const order of orders){
                 const addOrder = new Order({
-
-                })
+                    table: order.table, 
+                    products: order.products,
+                }, {timestamps: order.timestamps});
+                addOrder.save();
             }
+            console.log('DB Order successfully seeded');
         }
     } catch(err) { 
         console.log(`Error in seeding process: ${err}`);
     };    
-};
+}; 
