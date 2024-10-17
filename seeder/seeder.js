@@ -1,6 +1,6 @@
-import items from './products.json' assert { type: "json" };
-import tables  from './tables.json' assert { type: "json" };
-import orders from './orders.json' assert { type: "json" };
+import items from './products.json' with { type: "json" };
+import tables  from './tables.json' with { type: "json" };
+import orders from './orders.json' with { type: "json" };
 
 import Product from '../models/Product.js';
 import Table from '../models/Table.js';
@@ -15,45 +15,45 @@ export default async function Seeder(){
 
         if(!ProductCheck){
             for (const item of items){
-                const addprod = new Product({
+                const addProd = new Product({
                     name: item.name,
                     price: item.price, 
                     course: item.course,
                     options: item.options,
                     image: item.image,
                 }, {timestamps: item.timestamps});
-                addprod.save();
+                addProd.save();
             }
-            console.log('DB Product successfully seeded');
+            console.log('DB Product seeded');
         }
-        if(!TableCheck){
+        if (!TableCheck){
             for (const table of tables){
                 const addTable = new Table({
-                    tableNo: table.tableNo, 
-                    isOpen: table.isOpen, 
+                    tableNo: table.tableNo,
+                    isOpen: table.isOpen,
                     openedAt: table.openedAt,
-                    pax: table.pax, 
-                    name: table.name, 
-                    limit: table.limit, 
-                    comment: table.comment, 
-                    products: table.products, 
-                    total: table.products
+                    pax: table.pax,
+                    limit: table.limit,
+                    comment: table.comment,
+                    products: table.products,
+                    total: table.total
                 });
                 addTable.save();
             }
-            console.log('DB Table successfully seeded');
+            console.log('DB Table seeded');
         }
+
         if (!OrderCheck){
-            for (const order of orders){
+            for(const order of orders){
                 const addOrder = new Order({
-                    table: order.table, 
-                    products: order.products,
-                }, {timestamps: order.timestamps});
-                addOrder.save();
+                    table: order.table,
+                    products: order.products
+                }, { timestamps: order.timestamps })
+                addOrder.save(); 
             }
-            console.log('DB Order successfully seeded');
+            console.log('DB Order seeded');
         }
     } catch(err) { 
         console.log(`Error in seeding process: ${err}`);
     };    
-}; 
+};
