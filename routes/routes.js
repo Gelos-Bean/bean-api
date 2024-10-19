@@ -9,6 +9,8 @@ export default function Router(app){
     // CRUD ops for Products
     app.post('/add-item', (req, res) => {
         
+        const add = req.body; 
+
         const newItem = new Product({
             name: add.name,
             price: add.price,
@@ -45,7 +47,7 @@ export default function Router(app){
                     msg: 'No products found'
                 });
             }
-            
+
             res.status(200).send({
                 success: true, 
                 msg: allProducts
@@ -57,10 +59,17 @@ export default function Router(app){
     });
     
 
+    // Returns all products where the route parameter
+    // is found anywhere in the 'name' field of the database, 
+    // regardless of its position. Also case insensitive
     app.get('/products/:name', async (req, res) => {
-
+        
+        const prodNameURI = req.params.name;
+        
         try { 
-            const findProduct = await Product.findByName(req.params.name);
+            const findProduct = await Product.find({
+                name: { $regex: new RegExp(prodNameURI, "i") }
+              });
 
             if(!findProduct){
                 return res.status(400).send({
@@ -75,6 +84,7 @@ export default function Router(app){
             });
 
         } catch (err) { 
+            console.log(err);
             res.status(500).send({ status: false, msg: err });
         };
     });
@@ -108,8 +118,6 @@ export default function Router(app){
         try { 
             const deleteProd = await Product.findByIdAndDelete(req.params.id);
             
-            const deleteName = deleteProd.name;
-
             if(!deleteProd){
                 return res.status(400).send({
                     success: false,
@@ -119,7 +127,7 @@ export default function Router(app){
 
             res.status(200).send({
                 success: true,
-                msg: `${deleteName} deleted successfully`
+                msg: `${deleteProd.name} deleted successfully`
             });
 
         } catch (err) { 
@@ -132,12 +140,13 @@ export default function Router(app){
     //CRUD ops for Tables
     app.post('/new-table', (req, res) => {
     
-        const add = req.body
+        const add = req.body;
 
         const newTable = new Table({
             tableNo: add.tableNo,
             pax: add.pax,
-            limit: add.limit
+            limit: add.limit,
+            total: add.total ? add.total : 0
         });
 
 //------> is this handling all possible errors? 
@@ -160,18 +169,18 @@ export default function Router(app){
     app.get('/tables', async (req, res) => { 
 
         try {
-            const allOrders = await Order.find({});
+            const allTables = await Table.find({});
 
-            if (!allOrders) {
+            if (!allTables) {
                 return res.status(400).send({
                     success: false,
-                    msg: 'No orders found'
+                    msg: 'No tables found'
                 });
             }
             
             res.status(200).send({
                 success: true, 
-                msg: allOrders
+                msg: allTables
             });
 
         } catch (err) { 
@@ -180,137 +189,24 @@ export default function Router(app){
     })
 
 
-    app.get('/orders/:id', async (req, res) => { 
+    app.get('/tables/:tableNo', async (req, res) => { 
 
-        try { 
-            const findOrder = await Order.findById(req.params.id);
+        const tableNoURI = req.params.tableNo;
+        const URINumCheck = isNaN(parseInt(req.params.tableNo));
 
-            if(!findOrder){
-                return res.status(400).send({
-                    success: false,
-                    msg: 'Order not found'
-                });
-            }
-
-            res.status(200).send({
-                status: true,
-                msg: findOrder
-            });
-
-        } catch (err) { 
-            res.status(500).send({ status: false, msg: err });
-        };
-    })
-
-
-    app.put('/orders/:id', async (req, res) => { 
-
-        try { 
-            const updateOrder = await Order.findByIdAndUpdate(req.params.id, req.body, { new: true })
-
-            if(!updateOrder){
-                return res.status(400).send({
-                    success: false,
-                    msg: 'Order not found'
-                });
-            }
-
-            res.status(200).send({
-                success: true,
-                msg: `${updateOrder.name} updated`
-        });
-
-        } catch (err) { 
-            res.status(500).send({ status: false, msg: err });
-        };
-    })
-
-
-    app.delete('/orders/:id', async (req, res) => {
-
-        try { 
-            const deleteOrder = await Order.findByIdAndDelete(req.params.id);
-            
-            const deleteName = deleteOrder.name;
-
-            if(!deleteOrder){
-                return res.status(400).send({
-                    success: false,
-                    msg: 'Order not found'
-                });
-            }
-
-            res.status(200).send({
-                success: true,
-                msg: `${deleteName} deleted successfully`
-            });
-
-        } catch (err) { 
-            res.status(500).send({ status: false, msg: err });
-        }
-    });
-
-
-
-
-
-
-    // CRUD ops for Orders
-    app.post('/new-order', (req, res) => {
-        
-        let add = req.body
-
-        const newOrder = new Order({
-            table: add.table,
-            products: add.products
-        });
-
-//------> is this handling all possible errors? 
-        newOrder.save()
-            .then(() => {
-                res.status(200).send({
-                    success: true,
-                    msg: `Order ${newOrder._id} saved`
-                });
+        if (URINumCheck) {
+            return res.status(400).send({
+                status: false,
+                msg: "Not a number"
             })
-            .catch(err => { 
-                res.status(500).send({
-                    success: false,
-                    msg: err
-                });
-            });
-    });
-
-
-    app.get('/orders', async (req, res) => { 
-
-        try {
-            const allOrders = await Order.find({});
-
-            if (!allOrders) {
-                return res.status(400).send({
-                    success: false,
-                    msg: 'No orders found'
-                });
-            }
-            
-            res.status(200).send({
-                success: true, 
-                msg: allOrders
-            });
-
-        } catch (err) { 
-            res.status(500).send({ status: false, msg: err });
-        };
-    })
-
-
-    app.get('/orders/:id', async (req, res) => { 
+        }
 
         try { 
-            const findOrder = await Order.findById(req.params.id);
+            const findTable = await Table.find({
+                    tableNo : tableNoURI
+                });
 
-            if(!findOrder){
+            if(!findTable){
                 return res.status(400).send({
                     success: false,
                     msg: 'Order not found'
@@ -319,7 +215,7 @@ export default function Router(app){
 
             res.status(200).send({
                 status: true,
-                msg: findOrder
+                msg: findTable
             });
 
         } catch (err) { 
@@ -328,12 +224,14 @@ export default function Router(app){
     })
 
 
-    app.put('/orders/:id', async (req, res) => { 
+    // for handling table updates only (Limit, PAX, tableNo, etc.
+    // See put order/:id endpoint for adding more products to table
+    app.put('/tables/:id', async (req, res) => { 
 
         try { 
-            const updateOrder = await Order.findByIdAndUpdate(req.params.id, req.body, { new: true })
+            const updateTable = await Table.findByIdAndUpdate(req.params.id, req.body, { new: true })
 
-            if(!updateOrder){
+            if(!updateTable){
                 return res.status(400).send({
                     success: false,
                     msg: 'Order not found'
@@ -342,7 +240,7 @@ export default function Router(app){
 
             res.status(200).send({
                 success: true,
-                msg: `${updateOrder.name} updated`
+                msg: `Table ${updateTable.tableNo} updated`
         });
 
         } catch (err) { 
@@ -351,27 +249,25 @@ export default function Router(app){
     })
 
 
-    app.delete('/orders/:id', async (req, res) => {
+    app.delete('/tables/:id', async (req, res) => {
 
         try { 
-            const deleteOrder = await Order.findByIdAndDelete(req.params.id);
+            const deleteTable = await Table.findByIdAndDelete(req.params.id);
             
-            const deleteName = deleteOrder.name;
-
-            if(!deleteOrder){
+            if(!deleteTable){
                 return res.status(400).send({
                     success: false,
-                    msg: 'Order not found'
+                    msg: 'Table not found'
                 });
             }
 
             res.status(200).send({
                 success: true,
-                msg: `${deleteName} deleted successfully`
+                msg: `Table ${deleteTable.tableNo} deleted successfully`
             });
 
         } catch (err) { 
             res.status(500).send({ status: false, msg: err });
         }
     });
-};
+}
