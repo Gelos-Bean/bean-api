@@ -1,0 +1,35 @@
+[
+    {
+      "name": "Extra Cheese",
+      "price": 1.5
+    },
+    {
+      "name": "Bacon Bits",
+      "price": 2.0
+    },
+    {
+      "name": "Avocado",
+      "price": 2.5
+    },
+    {
+      "name": "Grilled Chicken",
+      "price": 3.0
+    },
+    {
+      "name": "Gluten-Free Crust",
+      "price": 1.0
+    },
+    {
+      "name": "Spicy Sauce",
+      "price": 0.5
+    },
+    {
+      "name": "Double Patty",
+      "price": 4.0
+    },
+    {
+      "name": "No Onions",
+      "price": 0.0
+    }
+  ]
+  
