@@ -1,0 +1,23 @@
+{
+  "name": "bean-scene",
+  "version": "1.0.0",
+  "description": "Bean-Scene POS API",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "Ben Kindon, Nicole Birch",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.7.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.6",
+    "nodemon": "^3.1.7"
+  }
+}
