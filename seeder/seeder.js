@@ -1,17 +1,18 @@
 /*import items from './products.json' with { type: "json" };
 import tables  from './tables.json' with { type: "json" };
-import orders from './orders.json' with { type: "json" };
+import options from './options.json' with { type: "json" };
 */
 import Product from '../models/Product.js';
 import Table from '../models/Table.js';
 import Order from '../models/Order.js';
+import Option from '../models/Option.js';
 
 
 export default async function Seeder(){  
     try { 
         const ProductCheck = await Product.findOne(); 
         const TableCheck = await Table.findOne();
-        const OrderCheck = await Order.findOne(); 
+        const OptionCheck = await Option.findOne(); 
 
         if(!ProductCheck){
             for (const item of items){
@@ -43,15 +44,15 @@ export default async function Seeder(){
             console.log('DB Table seeded');
         }
 
-        if (!OrderCheck){
-            for(const order of orders){
-                const addOrder = new Order({
-                    table: order.table,
-                    products: order.products
-                }, { timestamps: order.timestamps })
-                addOrder.save(); 
+        if (!OptionCheck){
+            for(const option of options){
+                const addOption = new Option({
+                    name: option.name,
+                    price: option.price
+                }, { timestamps: option.timestamps })
+                addOption.save(); 
             }
-            console.log('DB Order seeded');
+            console.log('DB Options seeded');
         }
     } catch(err) { 
         console.log(`Error in seeding process: ${err}`);
