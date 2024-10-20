@@ -198,7 +198,7 @@ export default function Router(app){
             return res.status(400).send({
                 status: false,
                 msg: "Not a number"
-            })
+            });
         }
 
         try { 
@@ -225,7 +225,7 @@ export default function Router(app){
 
 
     // for handling table updates only (Limit, PAX, tableNo, etc.
-    // See put order/:id endpoint for adding more products to table
+    // See put /new-order endpoint for adding more products to table
     app.put('/tables/:id', async (req, res) => { 
 
         try { 
@@ -270,4 +270,157 @@ export default function Router(app){
             res.status(500).send({ status: false, msg: err });
         }
     });
-}
+
+
+
+
+    // CRUD ops for Orders
+
+    // pass tableNum & product ID 
+    app.post('/new-order', async (req, res) => {
+
+        try  {
+            // Add products to running table bill 
+            const orderRequest = req.body;
+
+            // new order items to be added to order & table
+            const orderItems = req.body.products;
+
+// ---> Does this need error handling if it was already handled in the inital call?
+//          maybe server connection errors? (which would be called anyway if it failed?)
+            // save to items to table
+            const getTable = await Table.findById(orderRequest.table._id);
+
+// ---> Check how product object is being sent through the payload
+//      May be unnecessary to find item again             
+            for (const item of orderItems) {
+                await Product.findById(item._id);
+                getTable.products.push(item);
+                await getTable.save();
+            }
+
+            const newOrder = new Order({
+                table: getTable,
+                products: orderItems.products
+            });
+
+            const saveOrder = await newOrder.save();
+
+            if (!saveOrder){
+                return res.status(400).send({
+                    success: false, 
+                    msg: `Error sending order`
+                });
+            };
+
+            res.status(200).send({
+                success: true,
+                msg: `Order ${newOrder._id} sent`
+            });
+        
+        } catch(err) { 
+            console.log(err);
+            res.status(500).send({
+                success: false,
+                msg: err
+            });
+        };
+    });
+
+
+    app.get('/orders', async (req, res) => { 
+
+        try {
+            const allOrders = await Order.find({});
+
+            if (!allOrders) {
+                return res.status(400).send({
+                    success: false,
+                    msg: 'No orders found'
+                });
+            }
+            
+            res.status(200).send({
+                success: true, 
+                msg: allOrders
+            });
+
+        } catch (err) { 
+            res.status(500).send({ status: false, msg: err });
+        };
+    })
+
+
+// ----> TO DO:  Need to figure out how this actually works
+// ---->         look into setting the order _id as Number instead of Object.id?
+    app.get('/orders/:id', async (req, res) => { 
+
+        try { 
+            const findOrder = await Order.findById(req.params.id);
+
+            if(!findOrder){
+                return res.status(400).send({
+                    success: false,
+                    msg: 'Order not found'
+                });
+            }
+
+            res.status(200).send({
+                status: true,
+                msg: findOrder
+            });
+
+        } catch (err) { 
+            res.status(500).send({ status: false, msg: err });
+        };
+    })
+
+
+    app.put('/orders/:id', async (req, res) => { 
+
+        try { 
+            const updateOrder = await Order.findByIdAndUpdate(req.params.id, req.body, { new: true })
+
+            if(!updateOrder){
+                return res.status(400).send({
+                    success: false,
+                    msg: 'Order not found'
+                });
+            }
+
+            res.status(200).send({
+                success: true,
+                msg: `${updateOrder.name} updated`
+        });
+
+        } catch (err) { 
+            res.status(500).send({ status: false, msg: err });
+        };
+    })
+
+
+    app.delete('/orders/:id', async (req, res) => {
+
+        try { 
+
+// ----> TO DO: send item to sales history before deleting
+
+            const deleteOrder = await Order.findByIdAndDelete(req.params.id);
+            
+            if(!deleteOrder){
+                return res.status(400).send({
+                    success: false,
+                    msg: 'Order not found'
+                });
+            }
+
+            res.status(200).send({
+                success: true,
+                msg: `${deleteOrder.name} deleted successfully`
+            });
+
+        } catch (err) { 
+            res.status(500).send({ status: false, msg: err });
+        }
+    });
+};
