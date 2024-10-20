@@ -39,7 +39,10 @@ export default function Router(app){
     app.get('/products', async (req, res) => { 
 
         try {
-            const allProducts = await Product.find({});
+            const allProducts = await Product.find({}).populate({
+                path: 'options.item',
+                model: 'Option'
+          });
 
             if (!allProducts) {
                 return res.status(400).send({
@@ -70,11 +73,8 @@ export default function Router(app){
             const findProduct = await Product.find({
                 name: { $regex: new RegExp(prodNameURI, "i") }
               }).populate({
-                path: 'optionId',
-                populate: {
-                    path: 'optionId',
-                    model: 'Options'
-                }
+                    path: 'options.item',
+                    model: 'Option'
               });
 
             if(!findProduct){
@@ -99,7 +99,10 @@ export default function Router(app){
     app.put('/products/:id', async (req, res) => {
 
         try { 
-            const updateProd = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true })
+            const updateProd = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true }).populate({
+                path: 'options.item',
+                model: 'Option'
+          });
 
             if(!updateProd){
                 return res.status(400).send({
