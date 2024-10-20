@@ -69,6 +69,12 @@ export default function Router(app){
         try { 
             const findProduct = await Product.find({
                 name: { $regex: new RegExp(prodNameURI, "i") }
+              }).populate({
+                path: 'optionId',
+                populate: {
+                    path: 'optionId',
+                    model: 'Options'
+                }
               });
 
             if(!findProduct){
