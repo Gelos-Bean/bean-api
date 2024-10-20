@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import 'dotenv/config';
 import Router from './routes/routes.js';
-import Seeder from './seeder/seeder.js';
+//import Seeder from './seeder/seeder.js';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -14,9 +14,9 @@ const env = process.env;
 
 mongoose.connect(env.MONGO_URI)
     .then(() => console.log('Database connected'))
-    .then(() => {
+    /*.then(() => {
         Seeder();
-    })
+    })*/
     .then(() => {
         app.listen(PORT, () => { 
             console.log(`Server listening on Port: ${PORT}`);
