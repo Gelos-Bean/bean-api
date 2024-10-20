@@ -4,18 +4,10 @@ const {Schema, SchemaTypes, model} = mongoose;
 const productSchema = new Schema({
     name: { type: String, required: true },
     price: { type: Number, required: true },
-    category: { type: String, required: true }, //Eg: Kitchen or Bar, dictates the Order screen to dispay to
-    course: { type: String, required: false }, //Eg: Entree, not required for Bar products
-    //Let's take out inventory for now
-    // inventory: [{
-    //     item: { type: Schema.Types.ObjectId, ref: 'Inventory' },
-    //     quantityNeeded: { type: Number }
-    // }],
+    course: { type: String, required: true },
     options: [{
-            item: { 
                 type: SchemaTypes.ObjectId, 
-                ref: 'Product' },
-            quantity: { type: Number }
+                ref: 'Product'
         }],
     image: { type: String, required: false }
 },{ timestamps: true });
