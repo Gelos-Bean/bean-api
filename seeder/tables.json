@@ -1,128 +1,117 @@
 [
-    {
-      "tableNo": 1,
-      "isOpen": true,
-      "openedAt": "2024-10-17T08:30:00.000Z",
-      "pax": 4,
-      "name": "Smith Family",
-      "limit": 150,
-      "comment": "Birthday party",
-      "products": [
-        { "item": "652d2f45ccf6b5a6452c4e6f", "quantity": 2 },
-        { "item": "652d2f45ccf6b5a6452c4e71", "quantity": 1 }
-      ],
-      "total": 60.5
-    },
-    {
-      "tableNo": 2,
-      "isOpen": false,
-      "openedAt": null,
-      "pax": 0,
-      "name": null,
-      "limit": null,
-      "comment": null,
-      "products": [],
-      "total": 0
-    },
-    {
-      "tableNo": 3,
-      "isOpen": true,
-      "openedAt": "2024-10-17T09:15:00.000Z",
-      "pax": 2,
-      "name": "Jane Doe",
-      "limit": 100,
-      "comment": "Quick lunch",
-      "products": [
-        { "item": "652d2f45ccf6b5a6452c4e7a", "quantity": 1 }
-      ],
-      "total": 25.0
-    },
-    {
-      "tableNo": 4,
-      "isOpen": true,
-      "openedAt": "2024-10-17T10:00:00.000Z",
-      "pax": 3,
-      "name": "Brown Family",
-      "limit": 200,
-      "comment": "Casual dinner",
-      "products": [
-        { "item": "652d2f45ccf6b5a6452c4e6b", "quantity": 3 }
-      ],
-      "total": 75.0
-    },
-    {
-      "tableNo": 5,
-      "isOpen": false,
-      "openedAt": null,
-      "pax": 0,
-      "name": null,
-      "limit": null,
-      "comment": null,
-      "products": [],
-      "total": 0
-    },
-    {
-      "tableNo": 6,
-      "isOpen": true,
-      "openedAt": "2024-10-17T12:00:00.000Z",
-      "pax": 6,
-      "name": "Corporate Group",
-      "limit": 300,
-      "comment": "Business meeting",
-      "products": [
-        { "item": "652d2f45ccf6b5a6452c4e6d", "quantity": 4 }
-      ],
-      "total": 120.0
-    },
-    {
-      "tableNo": 7,
-      "isOpen": true,
-      "openedAt": "2024-10-17T13:45:00.000Z",
-      "pax": 2,
-      "name": "John and Jane",
-      "limit": 75,
-      "comment": "Anniversary",
-      "products": [
-        { "item": "652d2f45ccf6b5a6452c4e79", "quantity": 1 }
-      ],
-      "total": 40.0
-    },
-    {
-      "tableNo": 8,
-      "isOpen": false,
-      "openedAt": null,
-      "pax": 0,
-      "name": null,
-      "limit": null,
-      "comment": null,
-      "products": [],
-      "total": 0
-    },
-    {
-      "tableNo": 9,
-      "isOpen": true,
-      "openedAt": "2024-10-17T15:30:00.000Z",
-      "pax": 3,
-      "name": "Family Friends",
-      "limit": 150,
-      "comment": "Weekend gathering",
-      "products": [
-        { "item": "652d2f45ccf6b5a6452c4e77", "quantity": 2 }
-      ],
-      "total": 90.0
-    },
-    {
-      "tableNo": 10,
-      "isOpen": true,
-      "openedAt": "2024-10-17T16:00:00.000Z",
-      "pax": 5,
-      "name": "Williams Party",
-      "limit": 250,
-      "comment": "Celebration",
-      "products": [
-        { "item": "652d2f45ccf6b5a6452c4e73", "quantity": 5 }
-      ],
-      "total": 110.0
-    }
-  ]
-  
+  {
+    "tableNo": 1,
+    "openedAt": "2024-10-17T08:30:00.000Z",
+    "pax": 4,
+    "name": "Smith Family",
+    "limit": 150,
+    "comment": "Birthday party",
+    "products": [
+      { "item": "652d2f45ccf6b5a6452c4e6f", "quantity": 2 },
+      { "item": "652d2f45ccf6b5a6452c4e71", "quantity": 1 }
+    ],
+    "total": 60.5
+  },
+  {
+    "tableNo": 2,
+    "openedAt": null,
+    "pax": 0,
+    "name": null,
+    "limit": null,
+    "comment": null,
+    "products": [],
+    "total": 0
+  },
+  {
+    "tableNo": 3,
+    "openedAt": "2024-10-17T09:15:00.000Z",
+    "pax": 2,
+    "name": "Jane Doe",
+    "limit": 100,
+    "comment": "Quick lunch",
+    "products": [
+      { "item": "652d2f45ccf6b5a6452c4e7a", "quantity": 1 }
+    ],
+    "total": 25.0
+  },
+  {
+    "tableNo": 4,
+    "openedAt": "2024-10-17T10:00:00.000Z",
+    "pax": 3,
+    "name": "Brown Family",
+    "limit": 200,
+    "comment": "Casual dinner",
+    "products": [
+      { "item": "652d2f45ccf6b5a6452c4e6b", "quantity": 3 }
+    ],
+    "total": 75.0
+  },
+  {
+    "tableNo": 5,
+    "openedAt": null,
+    "pax": 0,
+    "name": null,
+    "limit": null,
+    "comment": null,
+    "products": [],
+    "total": 0
+  },
+  {
+    "tableNo": 6,
+    "openedAt": "2024-10-17T12:00:00.000Z",
+    "pax": 6,
+    "name": "Corporate Group",
+    "limit": 300,
+    "comment": "Business meeting",
+    "products": [
+      { "item": "652d2f45ccf6b5a6452c4e6d", "quantity": 4 }
+    ],
+    "total": 120.0
+  },
+  {
+    "tableNo": 7,
+    "openedAt": "2024-10-17T13:45:00.000Z",
+    "pax": 2,
+    "name": "John and Jane",
+    "limit": 75,
+    "comment": "Anniversary",
+    "products": [
+      { "item": "652d2f45ccf6b5a6452c4e79", "quantity": 1 }
+    ],
+    "total": 40.0
+  },
+  {
+    "tableNo": 8,
+    "openedAt": null,
+    "pax": 0,
+    "name": null,
+    "limit": null,
+    "comment": null,
+    "products": [],
+    "total": 0
+  },
+  {
+    "tableNo": 9,
+    "openedAt": "2024-10-17T15:30:00.000Z",
+    "pax": 3,
+    "name": "Family Friends",
+    "limit": 150,
+    "comment": "Weekend gathering",
+    "products": [
+      { "item": "652d2f45ccf6b5a6452c4e77", "quantity": 2 }
+    ],
+    "total": 90.0
+  },
+  {
+    "tableNo": 10,
+    "openedAt": "2024-10-17T16:00:00.000Z",
+    "pax": 5,
+    "name": "Williams Party",
+    "limit": 250,
+    "comment": "Celebration",
+    "products": [
+      { "item": "652d2f45ccf6b5a6452c4e73", "quantity": 5 }
+    ],
+    "total": 110.0
+  }
+]

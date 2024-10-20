@@ -1,7 +1,7 @@
-import items from './products.json' with { type: "json" };
+/*import items from './products.json' with { type: "json" };
 import tables  from './tables.json' with { type: "json" };
 import orders from './orders.json' with { type: "json" };
-
+*/
 import Product from '../models/Product.js';
 import Table from '../models/Table.js';
 import Order from '../models/Order.js';
