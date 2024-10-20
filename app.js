@@ -1,15 +1,10 @@
 import express from 'express';
-API-building
 import mongoose from 'mongoose';
 import 'dotenv/config';
 import Router from './routes/routes.js';
 //import Seeder from './seeder/seeder.js';
 
 import mongoose from'mongoose';
-
-import 'dotenv/config'; 
-const env = process.env;
-main
 
 const app = express();
 const PORT = process.env.PORT || 8080;
