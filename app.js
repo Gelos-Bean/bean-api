@@ -4,7 +4,6 @@ import 'dotenv/config';
 import Router from './routes/routes.js';
 //import Seeder from './seeder/seeder.js';
 
-import mongoose from'mongoose';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
