@@ -7,7 +7,7 @@ const productSchema = new Schema({
     course: { type: String, required: true },
     options: [{
                 type: SchemaTypes.ObjectId, 
-                ref: 'Product'
+                ref: 'Option'
         }],
     image: { type: String, required: false }
 },{ timestamps: true });

@@ -1,170 +1,313 @@
 [
-    {
-      "name": "Margherita Pizza",
-      "price": 12.99,
-      "category": "main",
-      "options": [
-        { "description": "Extra Cheese", "price": 1.5 },
-        { "description": "Gluten-Free Crust", "price": 2.0 }
-      ],
-      "image": "pizza.jpg"
-    },
-    {
-      "name": "Caesar Salad",
-      "price": 8.49,
-      "category": "entree",
-      "options": [
-        { "description": "Add Chicken", "price": 2.5 }
-      ],
-      "image": "caesar_salad.jpg"
-    },
-    {
-      "name": "Spaghetti Carbonara",
-      "price": 13.99,
-      "category": "main",
-      "options": [
-        { "description": "Extra Parmesan", "price": 0.75 }
-      ],
-      "image": "carbonara.jpg"
-    },
-    {
-      "name": "Tiramisu",
-      "price": 6.49,
-      "category": "dessert",
-      "options": [],
-      "image": "tiramisu.jpg"
-    },
-    {
-      "name": "Cappuccino",
-      "price": 3.99,
-      "category": "beverage",
-      "options": [
-        { "description": "Add Extra Shot", "price": 1.0 },
-        { "description": "Oat Milk", "price": 0.5 }
-      ],
-      "image": "cappuccino.jpg"
-    },
-    {
-      "name": "Espresso Martini",
-      "price": 9.99,
-      "category": "beverage",
-      "options": [],
-      "image": "espresso_martini.jpg"
-    },
-    {
-      "name": "Chicken Tacos",
-      "price": 10.99,
-      "category": "main",
-      "options": [
-        { "description": "Add Guacamole", "price": 1.5 },
-        { "description": "Extra Salsa", "price": 0.5 }
-      ],
-      "image": "chicken_tacos.jpg"
-    },
-    {
-      "name": "Lemonade",
-      "price": 2.99,
-      "category": "beverage",
-      "options": [
-        { "description": "Add Mint", "price": 0.5 }
-      ],
-      "image": "lemonade.jpg"
-    },
-    {
-      "name": "Beef Burger",
-      "price": 11.99,
-      "category": "main",
-      "options": [
-        { "description": "Add Bacon", "price": 2.0 },
-        { "description": "Extra Cheese", "price": 1.0 }
-      ],
-      "image": "beef_burger.jpg"
-    },
-    {
-      "name": "Iced Tea",
-      "price": 2.49,
-      "category": "beverage",
-      "options": [
-        { "description": "Add Lemon", "price": 0.25 }
-      ],
-      "image": "iced_tea.jpg"
-    },
-    {
-      "name": "Buffalo Wings",
-      "price": 9.99,
-      "category": "entree",
-      "options": [
-        { "description": "Add Ranch Sauce", "price": 0.75 }
-      ],
-      "image": "buffalo_wings.jpg"
-    },
-    {
-      "name": "Mojito",
-      "price": 8.99,
-      "category": "beverage",
-      "options": [
-        { "description": "Add Extra Rum", "price": 2.0 }
-      ],
-      "image": "mojito.jpg"
-    },
-    {
-      "name": "Greek Salad",
-      "price": 7.99,
-      "category": "entree",
-      "options": [],
-      "image": "greek_salad.jpg"
-    },
-    {
-      "name": "Orange Juice",
-      "price": 3.49,
-      "category": "beverage",
-      "options": [
-        { "description": "Add Ice", "price": 0.25 }
-      ],
-      "image": "orange_juice.jpg"
-    },
-    {
-      "name": "Grilled Salmon",
-      "price": 17.99,
-      "category": "main",
-      "options": [
-        { "description": "Add Lemon Butter", "price": 1.5 }
-      ],
-      "image": "grilled_salmon.jpg"
-    },
-    {
-      "name": "Panna Cotta",
-      "price": 5.99,
-      "category": "dessert",
-      "options": [],
-      "image": "panna_cotta.jpg"
-    },
-    {
-      "name": "Margarita",
-      "price": 7.99,
-      "category": "beverage",
-      "options": [
-        { "description": "Add Salt Rim", "price": 0.5 }
-      ],
-      "image": "margarita.jpg"
-    },
-    {
-      "name": "Vegetable Stir Fry",
-      "price": 10.99,
-      "category": "main",
-      "options": [
-        { "description": "Add Tofu", "price": 1.5 }
-      ],
-      "image": "vegetable_stir_fry.jpg"
-    },
-    {
-      "name": "Pina Colada",
-      "price": 8.49,
-      "category": "beverage",
-      "options": [
-        { "description": "Add Pineapple Slice", "price": 0.75 }
-      ],
-      "image": "pina_colada.jpg"
-    }
-  ]
-  
+  {
+    "name": "French Steak Sandwich",
+    "price": 24,
+    "course": "Main",
+    "options": [
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006e9"
+        }
+      },
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ef"
+        }
+      }
+    ],
+    "image": "https://example.com/french-steak-sandwich.jpg"
+  },
+  {
+    "name": "Chicken Caesar Salad",
+    "price": 18,
+    "course": "Main",
+    "options": [
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ec"
+        }
+      },
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ee"
+        }
+      }
+    ],
+    "image": "https://example.com/chicken-caesar-salad.jpg"
+  },
+  {
+    "name": "Classic Burger",
+    "price": 15,
+    "course": "Main",
+    "options": [
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006e9"
+        }
+      },
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006eb"
+        }
+      }
+    ],
+    "image": "https://example.com/classic-burger.jpg"
+  },
+  {
+    "name": "Veggie Delight",
+    "price": 12,
+    "course": "Main",
+    "image": "https://example.com/veggie-delight.jpg"
+  },
+  {
+    "name": "Spicy Chicken Wrap",
+    "price": 13,
+    "course": "Main",
+    "options": [
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ee"
+        }
+      },
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ec"
+        }
+      }
+    ],
+    "image": "https://example.com/spicy-chicken-wrap.jpg"
+  },
+  {
+    "name": "Bacon Cheeseburger",
+    "price": 17,
+    "course": "Main",
+    "options": [
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ea"
+        }
+      },
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006e9"
+        }
+      }
+    ],
+    "image": "https://example.com/bacon-cheeseburger.jpg"
+  },
+  {
+    "name": "BBQ Chicken Pizza",
+    "price": 22,
+    "course": "Main",
+    "options": [
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ec"
+        }
+      },
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ed"
+        }
+      }
+    ],
+    "image": "https://example.com/bbq-chicken-pizza.jpg"
+  },
+  {
+    "name": "Avocado Toast",
+    "price": 10,
+    "course": "Entree",
+    "options": [
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006eb"
+        }
+      }
+    ],
+    "image": "https://example.com/avocado-toast.jpg"
+  },
+  {
+    "name": "Pasta Carbonara",
+    "price": 19,
+    "course": "Main",
+    "image": "https://example.com/pasta-carbonara.jpg"
+  },
+  {
+    "name": "Greek Salad",
+    "price": 14,
+    "course": "Main",
+    "options": [
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ee"
+        }
+      },
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006e9"
+        }
+      }
+    ],
+    "image": "https://example.com/greek-salad.jpg"
+  },
+  {
+    "name": "Buffalo Wings",
+    "price": 16,
+    "course": "Main",
+    "options": [
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ef"
+        }
+      },
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006eb"
+        }
+      }
+    ],
+    "image": "https://example.com/buffalo-wings.jpg"
+  },
+  {
+    "name": "Margherita Pizza",
+    "price": 18,
+    "course": "Main",
+    "options": [
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ed"
+        }
+      }
+    ],
+    "image": "https://example.com/margherita-pizza.jpg"
+  },
+  {
+    "name": "Fish Tacos",
+    "price": 20,
+    "course": "Main",
+    "options": [
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ea"
+        }
+      }
+    ],
+    "image": "https://example.com/fish-tacos.jpg"
+  },
+  {
+    "name": "Spaghetti Bolognese",
+    "price": 19,
+    "course": "Main",
+    "options": [
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ec"
+        }
+      }
+    ],
+    "image": "https://example.com/spaghetti-bolognese.jpg"
+  },
+  {
+    "name": "Chicken Quesadilla",
+    "price": 17,
+    "course": "Main",
+    "options": [
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006eb"
+        }
+      },
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ed"
+        }
+      }
+    ],
+    "image": "https://example.com/chicken-quesadilla.jpg"
+  },
+  {
+    "name": "Pepperoni Pizza",
+    "price": 20,
+    "course": "Main",
+    "options": [
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ef"
+        }
+      }
+    ],
+    "image": "https://example.com/pepperoni-pizza.jpg"
+  },
+  {
+    "name": "Steak Frites",
+    "price": 28,
+    "course": "Main",
+    "options": [
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006e9"
+        }
+      },
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ea"
+        }
+      }
+    ],
+    "image": "https://example.com/steak-frites.jpg"
+  },
+  {
+    "name": "Mushroom Risotto",
+    "price": 22,
+    "course": "Main",
+    "options": [
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ed"
+        }
+      },
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ec"
+        }
+      }
+    ],
+    "image": "https://example.com/mushroom-risotto.jpg"
+  },
+  {
+    "name": "Grilled Salmon",
+    "price": 25,
+    "course": "Main",
+    "options": [
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ea"
+        }
+      },
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006e9"
+        }
+      }
+    ],
+    "image": "https://example.com/grilled-salmon.jpg"
+  },
+  {
+    "name": "Cobb Salad",
+    "price": 18,
+    "course": "Main",
+    "options": [
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006ec"
+        }
+      },
+      {
+        "item": {
+          "$oid": "6715fd090558dd07e50006eb"
+        }
+      }
+    ],
+    "image": "https://example.com/cobb-salad.jpg"
+  }
+]
