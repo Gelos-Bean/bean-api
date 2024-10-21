@@ -38,22 +38,22 @@ export default async function Seeder(){
             }
             console.log('DB Product seeded');
         }
-        // if (!TableCheck){
-        //     for (const table of tables){
-        //         const addTable = new Table({
-        //             tableNo: table.tableNo,
-        //             isOpen: table.isOpen,
-        //             openedAt: table.openedAt,
-        //             pax: table.pax,
-        //             limit: table.limit,
-        //             comment: table.comment,
-        //             products: table.products,
-        //             total: table.total
-        //         });
-        //         addTable.save();
-        //     }
-        //     console.log('DB Table seeded');
-        // }
+        if (!TableCheck){
+            for (const table of tables){
+                const addTable = new Table({
+                    tableNo: table.tableNo,
+                    isOpen: table.isOpen,
+                    openedAt: table.openedAt,
+                    pax: table.pax,
+                    limit: table.limit,
+                    comment: table.comment,
+                    products: table.products,
+                    total: table.total
+                });
+                addTable.save();
+            }
+            console.log('DB Table seeded');
+        }
 
     } catch(err) { 
         console.log(`Error in seeding process: ${err}`);
