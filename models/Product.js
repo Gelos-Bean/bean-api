@@ -5,12 +5,9 @@ const productSchema = new Schema({
     name: { type: String, required: true },
     price: { type: Number, required: true },
     course: { type: String, required: true },
-    options: [{
-                type: SchemaTypes.ObjectId, 
-                ref: 'Option'
-        }],
+    options: [{ type: SchemaTypes.ObjectId, ref: 'Option' }],
     image: { type: String, required: false }
-},{ timestamps: true });
+}, { timestamps: true });
 
 const Product = model('Product', productSchema);
 export default Product;
