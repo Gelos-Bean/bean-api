@@ -1,117 +1,90 @@
 [
   {
-    "tableNo": 1,
-    "openedAt": "2024-10-17T08:30:00.000Z",
-    "pax": 4,
-    "name": "Smith Family",
-    "limit": 150,
-    "comment": "Birthday party",
-    "products": [
-      { "item": "652d2f45ccf6b5a6452c4e6f", "quantity": 2 },
-      { "item": "652d2f45ccf6b5a6452c4e71", "quantity": 1 }
-    ],
-    "total": 60.5
+      "tableNo": 1,
+      "openedAt": "2024-10-23T12:45:00Z",
+      "pax": 2,
+      "limit": 100,
+      "products": [],
+      "total": 0.00
   },
   {
-    "tableNo": 2,
-    "openedAt": null,
-    "pax": 0,
-    "name": null,
-    "limit": null,
-    "comment": null,
-    "products": [],
-    "total": 0
+      "tableNo": 2,
+      "openedAt": "2024-10-23T13:00:00Z",
+      "pax": 3,
+      "limit": 150,
+      "products": [],
+      "total": 0.00
   },
   {
-    "tableNo": 3,
-    "openedAt": "2024-10-17T09:15:00.000Z",
-    "pax": 2,
-    "name": "Jane Doe",
-    "limit": 100,
-    "comment": "Quick lunch",
-    "products": [
-      { "item": "652d2f45ccf6b5a6452c4e7a", "quantity": 1 }
-    ],
-    "total": 25.0
+      "tableNo": 3,
+      "openedAt": "2024-10-23T14:00:00Z",
+      "pax": 4,
+      "products": [],
+      "total": 0.00
   },
   {
-    "tableNo": 4,
-    "openedAt": "2024-10-17T10:00:00.000Z",
-    "pax": 3,
-    "name": "Brown Family",
-    "limit": 200,
-    "comment": "Casual dinner",
-    "products": [
-      { "item": "652d2f45ccf6b5a6452c4e6b", "quantity": 3 }
-    ],
-    "total": 75.0
+      "tableNo": 4,
+      "openedAt": "2024-10-23T12:00:00Z",
+      "pax": 1,
+      "limit": 50,
+      "products": [],
+      "total": 0.00
   },
   {
-    "tableNo": 5,
-    "openedAt": null,
-    "pax": 0,
-    "name": null,
-    "limit": null,
-    "comment": null,
-    "products": [],
-    "total": 0
+      "tableNo": 5,
+      "openedAt": "2024-10-23T13:30:00Z",
+      "pax": 5,
+      "products": [],
+      "total": 0.00
   },
   {
-    "tableNo": 6,
-    "openedAt": "2024-10-17T12:00:00.000Z",
-    "pax": 6,
-    "name": "Corporate Group",
-    "limit": 300,
-    "comment": "Business meeting",
-    "products": [
-      { "item": "652d2f45ccf6b5a6452c4e6d", "quantity": 4 }
-    ],
-    "total": 120.0
+      "tableNo": 6,
+      "openedAt": "2024-10-23T11:45:00Z",
+      "pax": 6,
+      "products": [],
+      "total": 0.00
   },
   {
-    "tableNo": 7,
-    "openedAt": "2024-10-17T13:45:00.000Z",
-    "pax": 2,
-    "name": "John and Jane",
-    "limit": 75,
-    "comment": "Anniversary",
-    "products": [
-      { "item": "652d2f45ccf6b5a6452c4e79", "quantity": 1 }
-    ],
-    "total": 40.0
+      "tableNo": 7,
+      "openedAt": "2024-10-23T14:30:00Z",
+      "pax": 2,
+      "products": [],
+      "total": 0.00
   },
   {
-    "tableNo": 8,
-    "openedAt": null,
-    "pax": 0,
-    "name": null,
-    "limit": null,
-    "comment": null,
-    "products": [],
-    "total": 0
+      "tableNo": 8,
+      "openedAt": "2024-10-23T15:00:00Z",
+      "pax": 3,
+      "limit": 100,
+      "products": [],
+      "total": 0.00
   },
   {
-    "tableNo": 9,
-    "openedAt": "2024-10-17T15:30:00.000Z",
-    "pax": 3,
-    "name": "Family Friends",
-    "limit": 150,
-    "comment": "Weekend gathering",
-    "products": [
-      { "item": "652d2f45ccf6b5a6452c4e77", "quantity": 2 }
-    ],
-    "total": 90.0
+      "tableNo": 9,
+      "openedAt": "2024-10-23T12:15:00Z",
+      "pax": 1,
+      "products": [],
+      "total": 0.00
   },
   {
-    "tableNo": 10,
-    "openedAt": "2024-10-17T16:00:00.000Z",
-    "pax": 5,
-    "name": "Williams Party",
-    "limit": 250,
-    "comment": "Celebration",
-    "products": [
-      { "item": "652d2f45ccf6b5a6452c4e73", "quantity": 5 }
-    ],
-    "total": 110.0
+      "tableNo": 10,
+      "openedAt": "2024-10-23T12:30:00Z",
+      "pax": 4,
+      "products": [],
+      "total": 0.00
+  },
+  {
+      "tableNo": 11,
+      "openedAt": "2024-10-23T13:15:00Z",
+      "pax": 5,
+      "products": [],
+      "total": 0.00
+  },
+  {
+      "tableNo": 12,
+      "openedAt": "2024-10-23T14:45:00Z",
+      "pax": 6,
+      "products": [],
+      "total": 0.00
   }
 ]

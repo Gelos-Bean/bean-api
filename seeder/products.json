@@ -1,313 +1,212 @@
 [
   {
-    "name": "French Steak Sandwich",
-    "price": 24,
-    "course": "Main",
-    "options": [
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006e9"
-        }
-      },
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ef"
-        }
-      }
-    ],
-    "image": "https://example.com/french-steak-sandwich.jpg"
+      "name": "Margherita Pizza",
+      "price": 12.50,
+      "course": "Main Course",
+      "options": ["Extra Cheese", "Gluten-Free"],
+      "image": ""
   },
   {
-    "name": "Chicken Caesar Salad",
-    "price": 18,
-    "course": "Main",
-    "options": [
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ec"
-        }
-      },
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ee"
-        }
-      }
-    ],
-    "image": "https://example.com/chicken-caesar-salad.jpg"
+      "name": "Caesar Salad",
+      "price": 10.00,
+      "course": "Starter",
+      "options": ["No Onions", "Add Chicken"],
+      "image": ""
   },
   {
-    "name": "Classic Burger",
-    "price": 15,
-    "course": "Main",
-    "options": [
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006e9"
-        }
-      },
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006eb"
-        }
-      }
-    ],
-    "image": "https://example.com/classic-burger.jpg"
+      "name": "Chocolate Lava Cake",
+      "price": 7.00,
+      "course": "Dessert",
+      "options": [],
+      "image": ""
   },
   {
-    "name": "Veggie Delight",
-    "price": 12,
-    "course": "Main",
-    "image": "https://example.com/veggie-delight.jpg"
+      "name": "Lemonade",
+      "price": 4.00,
+      "course": "Beverage",
+      "options": ["Extra Spicy"],
+      "image": ""
   },
   {
-    "name": "Spicy Chicken Wrap",
-    "price": 13,
-    "course": "Main",
-    "options": [
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ee"
-        }
-      },
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ec"
-        }
-      }
-    ],
-    "image": "https://example.com/spicy-chicken-wrap.jpg"
+      "name": "Spaghetti Carbonara",
+      "price": 15.50,
+      "course": "Main Course",
+      "options": ["Large Size", "No Onions"],
+      "image": ""
   },
   {
-    "name": "Bacon Cheeseburger",
-    "price": 17,
-    "course": "Main",
-    "options": [
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ea"
-        }
-      },
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006e9"
-        }
-      }
-    ],
-    "image": "https://example.com/bacon-cheeseburger.jpg"
+      "name": "Beef Burger",
+      "price": 12.50,
+      "course": "Main Course",
+      "options": ["Add Bacon", "Gluten-Free", "Vegan"],
+      "image": ""
   },
   {
-    "name": "BBQ Chicken Pizza",
-    "price": 22,
-    "course": "Main",
-    "options": [
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ec"
-        }
-      },
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ed"
-        }
-      }
-    ],
-    "image": "https://example.com/bbq-chicken-pizza.jpg"
+      "name": "Greek Salad",
+      "price": 9.50,
+      "course": "Starter",
+      "options": ["No Onions", "Add Avocado"],
+      "image": ""
   },
   {
-    "name": "Avocado Toast",
-    "price": 10,
-    "course": "Entree",
-    "options": [
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006eb"
-        }
-      }
-    ],
-    "image": "https://example.com/avocado-toast.jpg"
+      "name": "Tiramisu",
+      "price": 7.50,
+      "course": "Dessert",
+      "options": [],
+      "image": ""
   },
   {
-    "name": "Pasta Carbonara",
-    "price": 19,
-    "course": "Main",
-    "image": "https://example.com/pasta-carbonara.jpg"
+      "name": "Iced Tea",
+      "price": 3.50,
+      "course": "Beverage",
+      "options": ["Extra Spicy"],
+      "image": ""
   },
   {
-    "name": "Greek Salad",
-    "price": 14,
-    "course": "Main",
-    "options": [
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ee"
-        }
-      },
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006e9"
-        }
-      }
-    ],
-    "image": "https://example.com/greek-salad.jpg"
+      "name": "Pepperoni Pizza",
+      "price": 13.00,
+      "course": "Main Course",
+      "options": ["Extra Cheese", "Large Size", "Gluten-Free"],
+      "image": ""
   },
   {
-    "name": "Buffalo Wings",
-    "price": 16,
-    "course": "Main",
-    "options": [
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ef"
-        }
-      },
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006eb"
-        }
-      }
-    ],
-    "image": "https://example.com/buffalo-wings.jpg"
+      "name": "Chicken Wings",
+      "price": 11.50,
+      "course": "Starter",
+      "options": ["Spicy", "Extra Spicy", "Double Meat"],
+      "image": ""
   },
   {
-    "name": "Margherita Pizza",
-    "price": 18,
-    "course": "Main",
-    "options": [
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ed"
-        }
-      }
-    ],
-    "image": "https://example.com/margherita-pizza.jpg"
+      "name": "Cheesecake",
+      "price": 6.50,
+      "course": "Dessert",
+      "options": [],
+      "image": ""
   },
   {
-    "name": "Fish Tacos",
-    "price": 20,
-    "course": "Main",
-    "options": [
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ea"
-        }
-      }
-    ],
-    "image": "https://example.com/fish-tacos.jpg"
+      "name": "Cola",
+      "price": 2.50,
+      "course": "Beverage",
+      "options": [],
+      "image": ""
   },
   {
-    "name": "Spaghetti Bolognese",
-    "price": 19,
-    "course": "Main",
-    "options": [
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ec"
-        }
-      }
-    ],
-    "image": "https://example.com/spaghetti-bolognese.jpg"
+      "name": "Veggie Pizza",
+      "price": 13.50,
+      "course": "Main Course",
+      "options": ["Vegan", "Gluten-Free", "Add Mushrooms", "Vegan Cheese"],
+      "image": ""
   },
   {
-    "name": "Chicken Quesadilla",
-    "price": 17,
-    "course": "Main",
-    "options": [
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006eb"
-        }
-      },
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ed"
-        }
-      }
-    ],
-    "image": "https://example.com/chicken-quesadilla.jpg"
+      "name": "Garlic Bread",
+      "price": 4.50,
+      "course": "Starter",
+      "options": ["Gluten-Free"],
+      "image": ""
   },
   {
-    "name": "Pepperoni Pizza",
-    "price": 20,
-    "course": "Main",
-    "options": [
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ef"
-        }
-      }
-    ],
-    "image": "https://example.com/pepperoni-pizza.jpg"
+      "name": "Brownie",
+      "price": 5.00,
+      "course": "Dessert",
+      "options": [],
+      "image": ""
   },
   {
-    "name": "Steak Frites",
-    "price": 28,
-    "course": "Main",
-    "options": [
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006e9"
-        }
-      },
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ea"
-        }
-      }
-    ],
-    "image": "https://example.com/steak-frites.jpg"
+      "name": "Orange Juice",
+      "price": 4.00,
+      "course": "Beverage",
+      "options": [],
+      "image": ""
   },
   {
-    "name": "Mushroom Risotto",
-    "price": 22,
-    "course": "Main",
-    "options": [
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ed"
-        }
-      },
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ec"
-        }
-      }
-    ],
-    "image": "https://example.com/mushroom-risotto.jpg"
+      "name": "Lasagna",
+      "price": 14.50,
+      "course": "Main Course",
+      "options": ["No Cheese", "Large Size", "Vegan Cheese"],
+      "image": ""
   },
   {
-    "name": "Grilled Salmon",
-    "price": 25,
-    "course": "Main",
-    "options": [
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ea"
-        }
-      },
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006e9"
-        }
-      }
-    ],
-    "image": "https://example.com/grilled-salmon.jpg"
+      "name": "French Fries",
+      "price": 4.00,
+      "course": "Starter",
+      "options": ["Spicy", "No Sauce"],
+      "image": ""
   },
   {
-    "name": "Cobb Salad",
-    "price": 18,
-    "course": "Main",
-    "options": [
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006ec"
-        }
-      },
-      {
-        "item": {
-          "$oid": "6715fd090558dd07e50006eb"
-        }
-      }
-    ],
-    "image": "https://example.com/cobb-salad.jpg"
+      "name": "Ice Cream Sundae",
+      "price": 5.50,
+      "course": "Dessert",
+      "options": [],
+      "image": ""
+  },
+  {
+      "name": "Sprite",
+      "price": 2.00,
+      "course": "Beverage",
+      "options": [],
+      "image": ""
+  },
+  {
+      "name": "BBQ Chicken Pizza",
+      "price": 15.00,
+      "course": "Main Course",
+      "options": ["Add Chicken", "Gluten-Free", "Double Meat"],
+      "image": ""
+  },
+  {
+      "name": "Mozzarella Sticks",
+      "price": 8.00,
+      "course": "Starter",
+      "options": ["Extra Cheese", "No Sauce"],
+      "image": ""
+  },
+  {
+      "name": "Pancakes",
+      "price": 7.50,
+      "course": "Dessert",
+      "options": ["Add Bacon", "Add Avocado"],
+      "image": ""
+  },
+  {
+      "name": "Fried Chicken Sandwich",
+      "price": 10.00,
+      "course": "Main Course",
+      "options": ["No Sauce", "Add Bacon", "Vegan"],
+      "image": ""
+  },
+  {
+      "name": "Cauliflower Wings",
+      "price": 9.50,
+      "course": "Starter",
+      "options": ["Vegan", "Extra Spicy"],
+      "image": ""
+  },
+  {
+      "name": "Banana Split",
+      "price": 6.00,
+      "course": "Dessert",
+      "options": [],
+      "image": ""
+  },
+  {
+      "name": "Milkshake",
+      "price": 5.00,
+      "course": "Beverage",
+      "options": ["Add Bacon"],
+      "image": ""
+  },
+  {
+      "name": "Ribeye Steak",
+      "price": 20.00,
+      "course": "Main Course",
+      "options": ["Double Meat", "Add Mushrooms", "Add Bacon"],
+      "image": ""
+  },
+  {
+      "name": "Bruschetta",
+      "price": 5.50,
+      "course": "Starter",
+      "options": ["No Onions", "Gluten-Free"],
+      "image": ""
   }
 ]
