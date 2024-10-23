@@ -1,7 +1,7 @@
 import Product from '../models/Product.js';
 import Order from '../models/Order.js';
 import Table from '../models/Table.js';
-
+import Option from '../models/Option.js';
 
 
 export default function Router(app){ 
@@ -57,7 +57,7 @@ export default function Router(app){
             });
 
         } catch (err) { 
-            res.status(500).send({ status: false, msg: err });
+            res.status(500).send({ success: false, msg: err });
         };
     });
     
@@ -85,13 +85,13 @@ export default function Router(app){
             }
 
             res.status(200).send({
-                status: true,
+                success: true,
                 msg: findProduct
             });
 
         } catch (err) { 
             console.log(err);
-            res.status(500).send({ status: false, msg: err });
+            res.status(500).send({ success: false, msg: err });
         };
     });
 
@@ -117,7 +117,7 @@ export default function Router(app){
         });
 
         } catch (err) { 
-            res.status(500).send({ status: false, msg: err });
+            res.status(500).send({ success: false, msg: err });
         };
     });
 
@@ -140,7 +140,7 @@ export default function Router(app){
             });
 
         } catch (err) { 
-            res.status(500).send({ status: false, msg: err });
+            res.status(500).send({ success: false, msg: err });
         };
     });
 
@@ -193,7 +193,7 @@ export default function Router(app){
             });
 
         } catch (err) { 
-            res.status(500).send({ status: false, msg: err });
+            res.status(500).send({ success: false, msg: err });
         };
     })
 
@@ -205,7 +205,7 @@ export default function Router(app){
 
         if (URINumCheck) {
             return res.status(400).send({
-                status: false,
+                success: false,
                 msg: "Not a number"
             });
         }
@@ -223,12 +223,12 @@ export default function Router(app){
             }
 
             res.status(200).send({
-                status: true,
+                success: true,
                 msg: findTable
             });
 
         } catch (err) { 
-            res.status(500).send({ status: false, msg: err });
+            res.status(500).send({ success: false, msg: err });
         };
     })
 
@@ -253,7 +253,7 @@ export default function Router(app){
         });
 
         } catch (err) { 
-            res.status(500).send({ status: false, msg: err });
+            res.status(500).send({ success: false, msg: err });
         };
     })
 
@@ -276,7 +276,7 @@ export default function Router(app){
             });
 
         } catch (err) { 
-            res.status(500).send({ status: false, msg: err });
+            res.status(500).send({ success: false, msg: err });
         }
     });
 
@@ -355,7 +355,7 @@ export default function Router(app){
             });
 
         } catch (err) { 
-            res.status(500).send({ status: false, msg: err });
+            res.status(500).send({ success: false, msg: err });
         };
     })
 
@@ -375,12 +375,12 @@ export default function Router(app){
             }
 
             res.status(200).send({
-                status: true,
+                success: true,
                 msg: findOrder
             });
 
         } catch (err) { 
-            res.status(500).send({ status: false, msg: err });
+            res.status(500).send({ success: false, msg: err });
         };
     })
 
@@ -403,7 +403,7 @@ export default function Router(app){
         });
 
         } catch (err) { 
-            res.status(500).send({ status: false, msg: err });
+            res.status(500).send({ success: false, msg: err });
         };
     })
 
@@ -429,7 +429,7 @@ export default function Router(app){
             });
 
         } catch (err) { 
-            res.status(500).send({ status: false, msg: err });
+            res.status(500).send({ success: false, msg: err });
         }
     });
 };
