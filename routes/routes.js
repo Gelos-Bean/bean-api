@@ -233,8 +233,6 @@ export default function Router(app){
         }
     });
 
-    // for handling table updates only (Limit, PAX, tableNo, etc.
-    // See put /new-order endpoint for adding more products to table
     app.put('/tables/:id', async (req, res) => { 
 
         try { 
