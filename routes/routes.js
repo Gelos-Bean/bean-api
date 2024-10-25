@@ -15,11 +15,10 @@ export default function Router(app){
             name: add.name,
             price: add.price,
             course: add.course,
-            options: add.options, 
+            options: req.body.options.map(op => op._id),
             image: add.image
         });
 
-//------> is this handling all possible errors? 
         newItem.save()
             .then(() => {
                 res.status(200).send({
@@ -37,12 +36,8 @@ export default function Router(app){
     
 
     app.get('/products', async (req, res) => { 
-
         try {
-            const allProducts = await Product.find({}).populate({
-                path: 'options.item',
-                model: 'Option'
-          });
+            const allProducts = await Product.find({}).populate('options');
 
             if (!allProducts) {
                 return res.status(400).send({
@@ -67,15 +62,12 @@ export default function Router(app){
     // regardless of its position. Also case insensitive
     app.get('/products/:name', async (req, res) => {
         
-        const prodNameURI = req.params.name;
+        const prodNameURI = req.params.name.toLowerCase();
         
         try { 
-            const findProduct = await Product.find({
+            const findProduct = await Product.findOne({
                 name: { $regex: new RegExp(prodNameURI, "i") }
-              }).populate({
-                    path: 'options.item',
-                    model: 'Option'
-              });
+              }).populate('options');
 
             if(!findProduct){
                 return res.status(400).send({
@@ -99,10 +91,7 @@ export default function Router(app){
     app.put('/products/:id', async (req, res) => {
 
         try { 
-            const updateProd = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true }).populate({
-                path: 'options.item',
-                model: 'Option'
-          });
+            const updateProd = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
 
             if(!updateProd){
                 return res.status(400).send({
@@ -199,39 +188,46 @@ export default function Router(app){
 
 
     app.get('/tables/:tableNo', async (req, res) => { 
-
         const tableNoURI = req.params.tableNo;
         const URINumCheck = isNaN(parseInt(req.params.tableNo));
-
+    
         if (URINumCheck) {
             return res.status(400).send({
                 success: false,
                 msg: "Not a number"
             });
         }
-
+    
         try { 
-            const findTable = await Table.find({
-                    tableNo : tableNoURI
-                });
-
-            if(!findTable){
-                return res.status(400).send({
+            const findTable = await Table.findOne({ tableNo: tableNoURI });
+    
+            if (!findTable) {
+                return res.status(404).send({
                     success: false,
                     msg: 'Order not found'
                 });
             }
-
+    
+            if (findTable.products && findTable.products.item) {
+                const productPromises = findTable.products.item.map(async (productId) => {
+                    const product = await Product.findById(productId);
+                    return product;
+                });
+    
+                const products = await Promise.all(productPromises);
+    
+                findTable.products.item = products; 
+            }
+    
             res.status(200).send({
                 success: true,
                 msg: findTable
             });
-
+    
         } catch (err) { 
-            res.status(500).send({ success: false, msg: err });
-        };
-    })
-
+            res.status(500).send({ success: false, msg: err.message });
+        }
+    });
 
     // for handling table updates only (Limit, PAX, tableNo, etc.
     // See put /new-order endpoint for adding more products to table

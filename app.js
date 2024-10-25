@@ -13,7 +13,7 @@ app.use(cors());
 //env const used for better readibility with dotenv library
 const env = process.env;
 
-mongoose.connect(env.MONGO_LOCAL)
+mongoose.connect(env.MONGO_URI)
     .then(() => console.log('Database connected'))
     .then(() => {
         app.listen(PORT, () => { 
