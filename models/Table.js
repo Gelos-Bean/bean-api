@@ -11,6 +11,7 @@ const tableSchema = new Schema({
     limit: { type: Number, required: false },
     products: [{
         item: { type: Schema.Types.ObjectId, ref: 'Product' },
+        selectedOptions: [{ type: SchemaTypes.ObjectId, ref: 'Option' }],
         quantity: { type: Number}
     }],
     total: { type: Number, required: true },
