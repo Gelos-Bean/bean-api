@@ -8,8 +8,8 @@ const orderSchema = new Schema({
     products: [{
         item: { type: SchemaTypes.ObjectId, ref: 'Product' }, 
         selectedOptions: [{ type: SchemaTypes.ObjectId, ref: 'Option' }],
-        quantity: { type: Number},
-        isSent: { type: Boolean }
+        quantity: { type: Number, default: 1 },
+        isSent: { type: Boolean, default: false }
     }],
 },{ timestamps: true });
 
