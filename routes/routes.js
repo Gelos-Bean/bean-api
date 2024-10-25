@@ -135,6 +135,7 @@ export default function Router(app){
 
 
 
+
     //CRUD ops for Tables
     app.post('/new-table', (req, res) => {
     
@@ -144,10 +145,10 @@ export default function Router(app){
             tableNo: add.tableNo,
             pax: add.pax,
             limit: add.limit,
+            products: add.products,
             total: add.total ? add.total : 0
         });
 
-//------> is this handling all possible errors? 
         newTable.save()
             .then(() => {
                 res.status(200).send({
@@ -167,7 +168,14 @@ export default function Router(app){
     app.get('/tables', async (req, res) => { 
 
         try {
-            const allTables = await Table.find({});
+            const allTables = await Table.find({})
+            .populate({
+                path: 'products.item',
+                model: 'Product'})
+            .populate({
+                path: 'products.selectedOptions',
+                model: 'Option'}
+            );
 
             if (!allTables) {
                 return res.status(400).send({
@@ -199,24 +207,20 @@ export default function Router(app){
         }
     
         try { 
-            const findTable = await Table.findOne({ tableNo: tableNoURI });
+            const findTable = await Table.findOne({ tableNo: tableNoURI })
+            .populate({
+                path: 'products.item',
+                model: 'Product'})
+            .populate({
+                path: 'products.selectedOptions',
+                model: 'Option'}
+            );;
     
             if (!findTable) {
                 return res.status(404).send({
                     success: false,
                     msg: 'Order not found'
                 });
-            }
-    
-            if (findTable.products && findTable.products.item) {
-                const productPromises = findTable.products.item.map(async (productId) => {
-                    const product = await Product.findById(productId);
-                    return product;
-                });
-    
-                const products = await Promise.all(productPromises);
-    
-                findTable.products.item = products; 
             }
     
             res.status(200).send({
@@ -229,8 +233,6 @@ export default function Router(app){
         }
     });
 
-    // for handling table updates only (Limit, PAX, tableNo, etc.
-    // See put /new-order endpoint for adding more products to table
     app.put('/tables/:id', async (req, res) => { 
 
         try { 
