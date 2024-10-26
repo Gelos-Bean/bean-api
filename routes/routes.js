@@ -429,4 +429,129 @@ export default function Router(app){
             res.status(500).send({ success: false, msg: err });
         }
     });
+
+
+
+
+
+     // CRUD ops for Options
+     app.post('/add-option', (req, res) => {
+        
+        const add = req.body; 
+
+        const newOption = new Option({
+            name: add.name,
+            price: add.price,
+        });
+
+        newOption.save()
+            .then(() => {
+                res.status(200).send({
+                    success: true,
+                    msg: `${newOption.name} saved`
+                });
+            })
+            .catch(err => { 
+                res.status(500).send({
+                    success: false,
+                    msg: err
+                });
+            });
+    });
+    
+
+    app.get('/options', async (req, res) => { 
+        try {
+            const allOptions = await Option.find({});
+
+            if (!allOptions) {
+                return res.status(400).send({
+                    success: false,
+                    msg: 'No options found'
+                });
+            }
+
+            res.status(200).send({
+                success: true, 
+                msg: allOptions
+            });
+
+        } catch (err) { 
+            res.status(500).send({ success: false, msg: err });
+        };
+    });
+    
+
+    app.get('/options/:name', async (req, res) => {
+        
+        const optionNameURI = req.params.name.toLowerCase();
+        
+        try { 
+            const findOption = await Option.findOne({
+                name: { $regex: new RegExp(optionNameURI, "i") }
+              }).populate('options');
+
+            if(!findOption){
+                return res.status(400).send({
+                    success: false,
+                    msg: 'Option not found'
+                });
+            }
+
+            res.status(200).send({
+                success: true,
+                msg: findOption
+            });
+
+        } catch (err) { 
+            console.log(err);
+            res.status(500).send({ success: false, msg: err });
+        };
+    });
+
+
+    app.put('/options/:id', async (req, res) => {
+
+        try { 
+            const updateOption = await Option.findByIdAndUpdate(req.params.id, req.body, { new: true });
+
+            if(!updateOption){
+                return res.status(400).send({
+                    success: false,
+                    msg: 'Option not found'
+                });
+            }
+
+            res.status(200).send({
+                success: true,
+                msg: `${updateOption.name} updated`
+        });
+
+        } catch (err) { 
+            res.status(500).send({ success: false, msg: err });
+        };
+    });
+
+
+    app.delete('/options/:id', async (req, res) => { 
+
+        try { 
+            const deleteOption = await Option.findByIdAndDelete(req.params.id);
+            
+            if(!deleteOption){
+                return res.status(400).send({
+                    success: false,
+                    msg: 'Product not found'
+                });
+            }
+
+            res.status(200).send({
+                success: true,
+                msg: `${deleteOption.name} deleted successfully`
+            });
+
+        } catch (err) { 
+            res.status(500).send({ success: false, msg: err });
+        };
+    });
 };
