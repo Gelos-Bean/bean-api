@@ -55,15 +55,12 @@ router.get('/', async (req, res) => {
 });
 
 
-// Returns all products where the route parameter
-// is found anywhere in the 'name' field of the database, 
-// regardless of its position. Also case insensitive
 router.get('/:name', async (req, res) => {
     
     const prodNameURI = req.params.name.toLowerCase();
     
     try { 
-        const findProduct = await Product.findOne({
+        const findProduct = await Product.find({
             name: { $regex: new RegExp(prodNameURI, "i") }
         }).populate('options');
 

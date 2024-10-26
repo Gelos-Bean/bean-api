@@ -58,7 +58,7 @@ router.get('/:name', async (req, res) => {
     const optionNameURI = req.params.name.toLowerCase();
     
     try { 
-        const findOption = await Option.findOne({
+        const findOption = await Option.find({
             name: { $regex: new RegExp(optionNameURI, "i") }
             });
 
