@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const { Schema, SchemaTypes, model } = mongoose;
+const { Schema, model } = mongoose;
 
 const optionSchema = new Schema({
     name: { type: String, required: true },
