@@ -489,7 +489,7 @@ export default function Router(app){
         try { 
             const findOption = await Option.findOne({
                 name: { $regex: new RegExp(optionNameURI, "i") }
-              }).populate('options');
+              });
 
             if(!findOption){
                 return res.status(400).send({
