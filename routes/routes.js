@@ -7,31 +7,38 @@ import Option from '../models/Option.js';
 export default function Router(app){ 
     
     // CRUD ops for Products
-    app.post('/add-item', (req, res) => {
+    app.post('/add-item', async (req, res) => {
         
-        const add = req.body; 
+        try { 
+            const add = req.body; 
 
-        const newItem = new Product({
-            name: add.name,
-            price: add.price,
-            course: add.course,
-            options: req.body.options.map(op => op._id),
-            image: add.image
-        });
-
-        newItem.save()
-            .then(() => {
-                res.status(200).send({
-                    success: true,
-                    msg: `${newItem.name} saved`
-                });
-            })
-            .catch(err => { 
-                res.status(500).send({
-                    success: false,
-                    msg: err
-                });
+            const newItem = new Product({
+                name: add.name,
+                price: add.price,
+                course: add.course,
+                options: add.options,
+                image: add.image
             });
+
+            await newItem.save();
+
+            res.status(200).send({
+                success: true,
+                msg: `${newItem.name} saved`
+            });
+
+        } catch (err) { 
+            if (err.name === "ValidationError"){
+                return res.status(400).send({
+                    success: false,
+                    msg: err.message
+                });
+            }
+            res.status(500).send({
+                success: false,
+                msg: err.message
+            });
+        }
     });
     
 
@@ -52,7 +59,7 @@ export default function Router(app){
             });
 
         } catch (err) { 
-            res.status(500).send({ success: false, msg: err });
+            res.status(500).send({ success: false, msg: err.message });
         };
     });
     
@@ -82,8 +89,7 @@ export default function Router(app){
             });
 
         } catch (err) { 
-            console.log(err);
-            res.status(500).send({ success: false, msg: err });
+            res.status(500).send({ success: false, msg: err.message });
         };
     });
 
@@ -93,20 +99,20 @@ export default function Router(app){
         try { 
             const updateProd = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
 
-            if(!updateProd){
-                return res.status(400).send({
-                    success: false,
-                    msg: 'Product not found'
-                });
-            }
-
             res.status(200).send({
                 success: true,
                 msg: `${updateProd.name} updated`
         });
 
         } catch (err) { 
-            res.status(500).send({ success: false, msg: err });
+            console.log(err.name)
+            if(err.name === "CastError"){
+                return res.status(400).send({
+                    success: false,
+                    msg: 'Product not found'
+                });
+            }
+            res.status(500).send({ success: false, msg: err.message });
         };
     });
 
@@ -115,21 +121,21 @@ export default function Router(app){
 
         try { 
             const deleteProd = await Product.findByIdAndDelete(req.params.id);
-            
-            if(!deleteProd){
-                return res.status(400).send({
-                    success: false,
-                    msg: 'Product not found'
-                });
-            }
 
             res.status(200).send({
                 success: true,
                 msg: `${deleteProd.name} deleted successfully`
             });
 
-        } catch (err) { 
-            res.status(500).send({ success: false, msg: err });
+        } catch (err) {
+
+            if(err.name === "CastError"){
+                return res.status(400).send({
+                    success: false,
+                    msg: 'Product not found'
+                });
+            }
+            res.status(500).send({ success: false, msg: err.message });
         };
     });
 
@@ -137,7 +143,7 @@ export default function Router(app){
 
 
     //CRUD ops for Tables
-    app.post('/new-table', (req, res) => {
+    app.post('/add-table', (req, res) => {
     
         const add = req.body;
 
@@ -157,10 +163,17 @@ export default function Router(app){
                 });
             })
             .catch(err => { 
+                if (err.name === "ValidationError"){
+                    return res.status(400).send({
+                        success: false,
+                        msg: err.message
+                    });
+                }
+
                 res.status(500).send({
                     success: false,
-                    msg: err
-                });
+                    msg: err.message
+                })
             });
     });
 
@@ -190,7 +203,7 @@ export default function Router(app){
             });
 
         } catch (err) { 
-            res.status(500).send({ success: false, msg: err });
+            res.status(500).send({ success: false, msg: err.message });
         };
     })
 
@@ -238,13 +251,6 @@ export default function Router(app){
 
         try { 
             const updateTable = await Table.findByIdAndUpdate(req.params.id, req.body, { new: true })
-            
-            if(!updateTable){
-                return res.status(400).send({
-                    success: false,
-                    msg: 'Order not found'
-                });
-            }
 
             res.status(200).send({
                 success: true,
@@ -252,7 +258,13 @@ export default function Router(app){
         });
 
         } catch (err) { 
-            res.status(500).send({ success: false, msg: err });
+            if(err.name === "CastError"){
+                return res.status(400).send({
+                    success: false,
+                    msg: 'Table not found'
+                });
+            }
+            res.status(500).send({ success: false, msg: err.message });
         };
     })
 
@@ -261,13 +273,6 @@ export default function Router(app){
 
         try { 
             const deleteTable = await Table.findByIdAndDelete(req.params.id);
-            
-            if(!deleteTable){
-                return res.status(400).send({
-                    success: false,
-                    msg: 'Table not found'
-                });
-            }
 
             res.status(200).send({
                 success: true,
@@ -275,7 +280,14 @@ export default function Router(app){
             });
 
         } catch (err) { 
-            res.status(500).send({ success: false, msg: err });
+            if(err.name === "CastError"){
+                return res.status(400).send({
+                    success: false,
+                    msg: 'Table not found'
+                });
+            }
+
+            res.status(500).send({ success: false, msg: err.message });
         }
     });
 
@@ -285,41 +297,43 @@ export default function Router(app){
     // CRUD ops for Orders
 
     // pass tableNum & product ID 
-    app.post('/new-order', async (req, res) => {
+    app.post('/add-order', async (req, res) => {
 
         try  {
             // new order items to be added to order & table
             const orderItems = req.body.products;
             const saveToTab = {...orderItems[0]};
-            // save items to table
-            const table = await Table.findById(req.body.table._id);
-            table.products.push(saveToTab);
-            table.save();
 
+            const table = await Table.findById(req.body.table._id);
+            
             const newOrder = new Order({
                 table: table,
                 products: orderItems
             });
 
-            const saveOrder = await newOrder.save();
+            await newOrder.save();
 
-            if (!saveOrder){
-                return res.status(400).send({
-                    success: false, 
-                    msg: `Error sending order`
-                });
-            };
+            // save items to table only if order is sent
+            table.products.push(saveToTab);
+            table.save();
+
 
             res.status(200).send({
                 success: true,
                 msg: `Order ${newOrder._id} sent`
             });
         
+
         } catch(err) { 
-            console.log(err);
+            if (err.name === "ValidationError"){
+                return res.status(400).send({
+                    success: false,
+                    msg: err.message
+                });
+            }
             res.status(500).send({
                 success: false,
-                msg: err
+                msg: err.message
             });
         };
     });
@@ -343,7 +357,7 @@ export default function Router(app){
             });
 
         } catch (err) { 
-            res.status(500).send({ success: false, msg: err });
+            res.status(500).send({ success: false, msg: err.message });
         };
     })
 
@@ -366,7 +380,7 @@ export default function Router(app){
             });
 
         } catch (err) { 
-            res.status(500).send({ success: false, msg: err });
+            res.status(500).send({ success: false, msg: err.message });
         };
     })
 
@@ -400,7 +414,13 @@ export default function Router(app){
         });
 
         } catch (err) { 
-            res.status(500).send({ success: false, msg: err });
+            if(err.name === "CastError"){
+                return res.status(400).send({
+                    success: false,
+                    msg: 'Order not found'
+                });
+            }
+            res.status(500).send({ success: false, msg: err.message });
         };
     })
 
@@ -412,13 +432,6 @@ export default function Router(app){
 // ----> Stretch TO DO: send item to sales history before deleting
 
             const deleteOrder = await Order.findByIdAndDelete(req.params.id);
-            
-            if(!deleteOrder){
-                return res.status(400).send({
-                    success: false,
-                    msg: 'Order not found'
-                });
-            }
 
             res.status(200).send({
                 success: true,
@@ -426,7 +439,14 @@ export default function Router(app){
             });
 
         } catch (err) { 
-            res.status(500).send({ success: false, msg: err });
+            if(err.name === "CastError"){
+                return res.status(400).send({
+                    success: false,
+                    msg: 'Order not found'
+                });
+            }
+
+            res.status(500).send({ success: false, msg: err.message });
         }
     });
 
@@ -452,9 +472,15 @@ export default function Router(app){
                 });
             })
             .catch(err => { 
+                if (err.name === "ValidationError"){
+                    return res.status(400).send({
+                        success: false,
+                        msg: err.message
+                    });
+                }
                 res.status(500).send({
                     success: false,
-                    msg: err
+                    msg: err.message
                 });
             });
     });
@@ -477,7 +503,7 @@ export default function Router(app){
             });
 
         } catch (err) { 
-            res.status(500).send({ success: false, msg: err });
+            res.status(500).send({ success: false, msg: err.message });
         };
     });
     
@@ -505,7 +531,7 @@ export default function Router(app){
 
         } catch (err) { 
             console.log(err);
-            res.status(500).send({ success: false, msg: err });
+            res.status(500).send({ success: false, msg: err.message });
         };
     });
 
@@ -515,20 +541,19 @@ export default function Router(app){
         try { 
             const updateOption = await Option.findByIdAndUpdate(req.params.id, req.body, { new: true });
 
-            if(!updateOption){
-                return res.status(400).send({
-                    success: false,
-                    msg: 'Option not found'
-                });
-            }
-
             res.status(200).send({
                 success: true,
                 msg: `${updateOption.name} updated`
         });
 
         } catch (err) { 
-            res.status(500).send({ success: false, msg: err });
+            if(err.name === "CastError"){
+                return res.status(400).send({
+                    success: false,
+                    msg: 'Option not found'
+                });
+            }
+            res.status(500).send({ success: false, msg: err.message });
         };
     });
 
@@ -537,13 +562,6 @@ export default function Router(app){
 
         try { 
             const deleteOption = await Option.findByIdAndDelete(req.params.id);
-            
-            if(!deleteOption){
-                return res.status(400).send({
-                    success: false,
-                    msg: 'Product not found'
-                });
-            }
 
             res.status(200).send({
                 success: true,
@@ -551,7 +569,15 @@ export default function Router(app){
             });
 
         } catch (err) { 
-            res.status(500).send({ success: false, msg: err });
+
+            if(err.name === "CastError"){
+                return res.status(400).send({
+                    success: false,
+                    msg: 'Option not found'
+                });
+            }
+
+            res.status(500).send({ success: false, msg: err.message });
         };
     });
 };
