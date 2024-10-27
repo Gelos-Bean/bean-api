@@ -3,7 +3,7 @@ import Product from '../models/Product.js';
 
 const router = Router();
 
-router.post('/add-product', async (req, res) => {
+router.post('/', async (req, res) => {
     try { 
         const add = req.body; 
 

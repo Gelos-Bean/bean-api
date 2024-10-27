@@ -3,7 +3,7 @@ import Order from '../models/Order.js';
 
 const router = Router();
 
-router.post('/add-order', async (req, res) => {
+router.post('/', async (req, res) => {
 
     try  {
         // new order items to be added to order & table

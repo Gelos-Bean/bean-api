@@ -3,7 +3,7 @@ import Table from '../models/Table.js';
 
 const router = Router(); 
 
-router.post('/add-table', (req, res) => {
+router.post('/', (req, res) => {
 
     const add = req.body;
 

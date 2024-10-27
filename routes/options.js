@@ -3,7 +3,7 @@ import Option from '../models/Option.js';
 
 const router = Router(); 
 
-router.post('/add-option', (req, res) => {
+router.post('/', (req, res) => {
     
     const add = req.body; 
 
