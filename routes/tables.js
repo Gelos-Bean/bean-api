@@ -10,8 +10,7 @@ router.post('/', (req, res) => {
     const newTable = new Table({
         tableNo: add.tableNo,
         pax: add.pax,
-        limit: add.limit,
-        products: add.products,
+        limit: add.limit ? add.limit : null,
         total: add.total ? add.total : 0
     });
 
