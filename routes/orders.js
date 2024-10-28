@@ -14,7 +14,8 @@ router.post('/', async (req, res) => {
         
         const newOrder = new Order({
             table: table,
-            products: orderItems
+            products: orderItems,
+            comment: req.body.comment
         });
 
         await newOrder.save();
