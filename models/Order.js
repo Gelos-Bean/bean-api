@@ -11,6 +11,7 @@ const orderSchema = new Schema({
         quantity: { type: Number, default: 1 },
         isSent: { type: Boolean, default: false }
     }],
+    comment: { type: String }
 },{ timestamps: true });
 
 const Order = model('Order', orderSchema);
