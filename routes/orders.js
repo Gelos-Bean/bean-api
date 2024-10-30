@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import Order from '../models/Order.js';
+import Table from '../models/Table.js';
+
 
 const router = Router();
 
@@ -46,7 +48,18 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => { 
 
     try {
-        const allOrders = await Order.find({});
+        const allOrders = await Order.find({})
+            .populate({
+                path: 'table',
+                model: 'Table'})
+            .populate({
+                path: 'products.item',
+                model: 'Product'
+            })
+            .populate({
+                path: 'products.selectedOptions',
+                model: 'Option'
+            })
 
         if (!allOrders) {
             return res.status(400).send({ 
@@ -68,7 +81,18 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => { 
 
     try { 
-        const findOrder = await Order.findById(req.params.id);
+        const findOrder = await Order.findById(req.params.id)
+            .populate({
+                path: 'table',
+                model: 'Table'})
+            .populate({
+                path: 'products.item',
+                model: 'Product'
+            })
+            .populate({
+                path: 'products.selectedOptions',
+                model: 'Option'
+            });
 
         if(!findOrder){
             return res.status(400).send({ 
