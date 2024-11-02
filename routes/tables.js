@@ -3,33 +3,43 @@ import Table from '../models/Table.js';
 
 const router = Router(); 
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
+    try{ 
+        const { tableNo, pax, limit, total } = req.body;
 
-    const add = req.body;
+        const existingTable = await Table.findOne({ tableNo });
+        if (existingTable) {
+            return res.status(409).send({
+                success: false,
+                msg: `Table ${tableNo} already exists`
+              });
+        }
 
-    const newTable = new Table({
-        tableNo: add.tableNo,
-        pax: add.pax,
-        limit: add.limit ? add.limit : null,
-        total: add.total ? add.total : 0
-    });
-
-    newTable.save()
-        .then(() => {
+        const newTable = new Table({
+            tableNo: tableNo,
+            pax: pax,
+            limit: limit ? limit : '',
+            total: total ? total : 0
+        });
+        
+        const saveTable = await newTable.save();
+        
+        if (saveTable) {
             res.status(200).send({ 
                 success: true, 
-                msg: `Table ${newTable.tableNo} created` 
+                msg: `Table ${newTable.tableNo} created`,
+                _id: saveTable._id
             });
-        })
-        .catch(err => { 
-            if (err.name === "ValidationError"){
-                return res.status(400).send({ 
-                    success: false, 
-                    msg: err.message 
+        }
+    } catch(err) { 
+        if (err.name === "ValidationError") {
+            return res.status(400).send({ 
+                success: false, 
+                msg: err.message 
                 });
             }
-            res.status(500).send({ success: false, msg: err.message })
-        });
+        res.status(500).send({ success: false, msg: err.message })
+    }
 });
 
 
