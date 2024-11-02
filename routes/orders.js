@@ -7,43 +7,35 @@ const router = Router();
 
 router.post('/', async (req, res) => {
 
-    try  {
-        // new order items to be added to order & table
-        const orderItems = req.body.products;
-        const saveToTab = {...orderItems[0]};
-
-        const table = await Table.findById(req.body.table._id);
-        
+    try {
+        const { table, products, comment, total } = req.body;
+        const tableId = await Table.findById(table._id);
+       
         const newOrder = new Order({
-            table: table,
-            products: orderItems,
-            comment: req.body.comment
+            table: tableId,
+            products: products,
+            comment: comment,
+            total: total
         });
 
         await newOrder.save();
 
-        // save items to table only if order is sent
-        table.products.push(saveToTab);
-        table.save();
-
+        tableId.products.push(...products);
+        tableId.total += total;
+        await tableId.save();
 
         res.status(200).send({
             success: true,
             msg: `Order ${newOrder._id} sent`
         });
-    
 
-    } catch(err) { 
-        if (err.name === "ValidationError"){
-            return res.status(400).send({ 
-                success: false, 
-                msg: err.message 
-            });
+    } catch (err) {
+        if (err.name === "ValidationError") {
+            return res.status(400).send({ success: false, msg: err.message });
         }
         res.status(500).send({ success: false, msg: err.message });
-    };
+    }
 });
-
 
 router.get('/', async (req, res) => { 
 
