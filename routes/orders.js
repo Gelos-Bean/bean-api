@@ -107,7 +107,7 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => { 
 
     try { 
-        const updateOrder = await Order.findByIdAndUpdate(req.params._id, req.body, { new: true })
+        const updateOrder = await Order.findByIdAndUpdate(req.params.id, req.body, { new: true })
             .populate({
                 path: 'table',
                 model: 'Table'})
@@ -119,10 +119,19 @@ router.put('/:id', async (req, res) => {
                 path: 'products.selectedOptions',
                 model: 'Option'
             });
+console.log(req.params._id)
+            console.log(updateOrder);
+
+            if(!updateOrder) {
+                return res.status(400).send({ 
+                    success: false, 
+                    msg: 'Order not sent' 
+                });
+            }
 
         res.status(200).send({
             success: true,
-            msg: `${updateOrder.name} sent`
+            msg: `Items sent`
     });
 
     } catch (err) { 
