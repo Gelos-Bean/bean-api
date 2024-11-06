@@ -107,7 +107,18 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => { 
 
     try { 
-        const updateOrder = await Order.findByIdAndUpdate(req.params._id, req.body, { new: true });
+        const updateOrder = await Order.findByIdAndUpdate(req.params._id, req.body, { new: true })
+            .populate({
+                path: 'table',
+                model: 'Table'})
+            .populate({
+                path: 'products.item',
+                model: 'Product'
+            })
+            .populate({
+                path: 'products.selectedOptions',
+                model: 'Option'
+            });
 
         res.status(200).send({
             success: true,
