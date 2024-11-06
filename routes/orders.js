@@ -119,8 +119,6 @@ router.put('/:id', async (req, res) => {
                 path: 'products.selectedOptions',
                 model: 'Option'
             });
-console.log(req.params._id)
-            console.log(updateOrder);
 
             if(!updateOrder) {
                 return res.status(400).send({ 
