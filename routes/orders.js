@@ -149,6 +149,7 @@ router.delete('/:id', async (req, res) => {
     try { 
 
 // ----> Stretch TO DO: send item to sales history before deleting
+// ----> BK note on the above: this should go in delete tables, not orders
 
         const deleteOrder = await Order.findByIdAndDelete(req.params.id);
 
