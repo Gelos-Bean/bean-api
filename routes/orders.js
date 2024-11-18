@@ -107,29 +107,29 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => { 
 
     try { 
+        const updateOrder = await Order.findByIdAndUpdate(req.params.id, req.body, { new: true })
+            .populate({
+                path: 'table',
+                model: 'Table'})
+            .populate({
+                path: 'products.item',
+                model: 'Product'
+            })
+            .populate({
+                path: 'products.selectedOptions',
+                model: 'Option'
+            });
 
-        // get order items 
-        // compare order.products against req.body products
-        // find table 
-        //      if changes === product changes
-        //              update
-        //      else leave
-        // Update order
-
-
-
-        const updateOrder = await Order.findByIdAndUpdate(req.params._id, req.body, { new: true })
-
-        
-        const updateTable = await Table.findByIdAndUpdate(req.params.table._id, req.body.products,  { new: true })
-
-        table.products.push(saveToTab);
-        table.save();
-
+            if(!updateOrder) {
+                return res.status(400).send({ 
+                    success: false, 
+                    msg: 'Order not sent' 
+                });
+            }
 
         res.status(200).send({
             success: true,
-            msg: `${updateOrder.name} updated`
+            msg: `Items sent`
     });
 
     } catch (err) { 
