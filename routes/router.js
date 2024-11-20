@@ -3,6 +3,7 @@ import orderRoutes from "./orders.js";
 import productRoutes from "./products.js";
 import tableRoutes from "./tables.js";
 import salesHistoryRoutes from "./salesHistory.js";
+import userRoutes from "./users.js"
 
 export default function Router(app){ 
 
@@ -11,4 +12,6 @@ export default function Router(app){
     app.use(['/add-product', '/products'], productRoutes);
     app.use(['/add-table', '/tables'], tableRoutes);
     app.use(['/add-report', '/reports'], salesHistoryRoutes);
+    app.use(['/add-user', '/users'], userRoutes);
+
 };

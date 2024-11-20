@@ -15,12 +15,12 @@ router.post('/', async (req, res) => {
         };
 
         const newReport = new SalesHistory({
-            date: date,
+            date: new Date(new Date(req.body.date).setUTCHours(0, 0, 0, 0)), 
             sales: [],
             totalFood: 0,
             totalBev: 0,
-            total: 0
-        });
+            total: 0,
+          });
 
         const saveReport = await newReport.save();
 

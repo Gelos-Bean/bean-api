@@ -1,15 +1,16 @@
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 import bcrypt from 'bcrypt';
-import { roles } from '../config/user-roles.json';
+import rolesConfig from '../config/user-roles.json' assert { type: 'json' }; 
 
+const roles = rolesConfig.roles;
 
 const UserSchema = new Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { 
         type: String,
-        enum: roles.split(','),
+        enum: roles,
         default: roles[0],
         required: true }
 }, { timestamps: true });
@@ -22,7 +23,7 @@ UserSchema.pre('save', async function(next) {
         if(!this.isModified('password')) 
             return next();
 
-        const salt = bcrypt.genSalt(10);
+        const salt = await bcrypt.genSalt(10);
         this.password = await bcrypt.hash(this.password, salt);
         next();
     } catch (err) {
