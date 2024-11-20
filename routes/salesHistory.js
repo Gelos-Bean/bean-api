@@ -211,9 +211,10 @@ router.delete('/:id', async (req, res) => {
     try { 
         const deleteReport = await SalesHistory.findByIdAndDelete(req.params.id);
 
+        const date = deleteReport.date;
         res.status(200).send({
             success: true,
-            msg: `Sales report for ${deleteTable.date} deleted successfully`
+            msg: `Sales report for ${date.toISOString().split('T')[0]} deleted successfully`
         });
 
     } catch (err) { 

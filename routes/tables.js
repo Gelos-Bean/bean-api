@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import Table from '../models/Table.js';
+import SalesHistory from '../models/SalesHistory.js';
 
 const router = Router(); 
 
@@ -139,6 +140,66 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
 
     try { 
+        const table = await Table.findById(req.params.id)
+            .populate({
+                path: 'products.item',
+                model: 'Product'})
+            .populate({
+                path: 'products.selectedOptions',
+                model: 'Option'});
+
+    // save table to sales history before deleting
+        const date = new Date().toISOString().split('T')[0];
+        let report = await SalesHistory.findOne({ date: date });
+
+        if (!report) {
+            report = new SalesHistory({ 
+                date: date,
+                sales: [],
+                totalFood: 0,
+                totalBev: 0,
+                total: 0
+            });
+        }
+
+        const saleToAdd = {
+            tableNo: table.tableNo,
+            openedAt: table.openedAt,
+            pax: table.pax,
+            limit: Number(table.limit),
+            products: table.products,
+            total: table.total
+        };
+
+        report.sales.push(saleToAdd);
+
+        const foodCourse = ["Starter", "Main", "Dessert"];
+
+        report.total = report.sales.reduce((sum, sale) => sum + (sale.total || 0), 0);
+        report.totalFood = report.sales.reduce((sum, sale) => {
+            return sum + sale.products.reduce((foodSum, product) => {
+                return foodCourse.includes(product.item.course) ? foodSum + product.quantity * product.item.price : foodSum;
+            }, 0);
+        }, 0);
+        report.totalBev = report.sales.reduce((sum, sale) => {
+            return sum + sale.products.reduce((bevSum, product) => {
+                return product.item.course === 'Beverage' ? bevSum + product.quantity * product.item.price : bevSum;
+            }, 0);
+        }, 0);
+
+        const saveReport = await report.save();
+
+        if (!saveReport) {
+            res.status(400).send({
+                success: false,
+                msg: 'Could not save sale to sales history, try again later',
+            })
+        }
+
+        console.log(`sales history saved`);
+
+
+        //Once sales history saved, delete table
         const deleteTable = await Table.findByIdAndDelete(req.params.id);
 
         res.status(200).send({
