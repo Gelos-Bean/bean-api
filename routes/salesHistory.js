@@ -2,20 +2,30 @@ import { Router } from 'express';
 import SalesHistory from '../models/SalesHistory.js';
 
 const router = Router(); 
+const options = {
+    timeZone: 'Australia/Sydney',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    };
 
-router.post('/', async (req, res) => {
+router.get('/today', async (req, res) => {
     try{ 
-        const { date } = req.body;
-        const existingDate = await SalesHistory.findOne({ date })
-        if (existingDate) {
-            return res.status(400).send({
-                success: false,
-                msg: `There is already a sales report for that date: ${date}`
+        const newDate = new Date().toLocaleString('en-AU', options);
+        const dateParts = newDate.split('/');
+        const date = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`
+
+        const report = await SalesHistory.findOne({ date })
+        if (report) {
+            res.status(200).send({ 
+                success: true, 
+                msg: report
               });
+              return;
         };
 
         const newReport = new SalesHistory({
-            date: new Date(new Date(req.body.date).setUTCHours(0, 0, 0, 0)), 
+            date: date,
             sales: [],
             totalFood: 0,
             totalBev: 0,
@@ -26,7 +36,7 @@ router.post('/', async (req, res) => {
 
         if(saveReport) {
             res.status(200).send({
-                success: true,
+                success: false,
                 msg: `New empty sales reported created for ${date}`,
             });
         }
@@ -37,7 +47,6 @@ router.post('/', async (req, res) => {
                     msg: err.message 
                     });
                 }
-            res.status(500).send({ success: false, msg: err.message })
         }
 });
 
@@ -54,22 +63,7 @@ router.get('/:date', async (req, res) => {
         });
       }
   
-        // Parse the date and match it in the database
-        const localStartOfDay = new Date(date);
-        localStartOfDay.setHours(0, 0, 0, 0);
-        
-        const localEndOfDay = new Date(date);
-        localEndOfDay.setHours(23, 59, 59, 999);
-        
-        const startOfDay = new Date(localStartOfDay.toISOString());
-        const endOfDay = new Date(localEndOfDay.toISOString());
-
-        const report = await SalesHistory.findOne({
-            date: {
-            $gte: startOfDay,
-            $lte: endOfDay,  
-            }
-        });
+        const report = await SalesHistory.findOne({ date })
         if (!report) {
             return res.status(404).send({
             success: false,
