@@ -3,6 +3,12 @@ import Table from '../models/Table.js';
 import SalesHistory from '../models/SalesHistory.js';
 
 const router = Router(); 
+const options = {
+    timeZone: 'Australia/Sydney',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    };
 
 router.post('/', async (req, res) => {
     try{ 
@@ -149,16 +155,15 @@ router.delete('/:id', async (req, res) => {
                 model: 'Option'});
 
     // save table to sales history before deleting
-        const date = new Date().toISOString().split('T')[0];
+        const newDate = new Date().toLocaleString('en-AU', options);
+        const dateParts = newDate.split('/');
+        const date = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`
+
         let report = await SalesHistory.findOne({ date: date });
 
         if (!report) {
             report = new SalesHistory({ 
-                date: date,
-                sales: [],
-                totalFood: 0,
-                totalBev: 0,
-                total: 0
+                date: date
             });
         }
 

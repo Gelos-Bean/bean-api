@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const {Schema, SchemaTypes, model} = mongoose;
 
 const salesHistorySchema = new Schema({
-    date: { type: Date, default: Date.now, required: true },
+    date: { type: String, required: true },
     sales: [{
         tableNo: { type: Number },
         openedAt: { 
