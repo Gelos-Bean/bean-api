@@ -4,27 +4,29 @@ import User from "./../models/Users.js"
 const router = Router(); 
 
 router.post('/', async (req, res) => {
-    const { username, password, role } = req.body;
+    const { pin, username, name, role, image } = req.body;
 
-    if (!username || !password) {
+    if (!pin || !username || !name) {
         return res.status(400).send({
             registered: false, 
-            msg: "User not added - username and password are both required."
+            msg: "User not added. Pin, username and name are required"
         });
     }
 
     try {
         const registeredUser = new User({
+            pin,
             username,
-            password,
-            role: role ? role : "Staff"
+            name,
+            role: role ? role : "Staff",
+            image: image ? image : ""
         });
 
         const savedUser = await registeredUser.save();
 
         return res.status(201).send({ 
             registered: true, 
-            msg: `User ${savedUser.username} has been added as ${savedUser.role}.` 
+            msg: `User ${savedUser.name} has been added as ${savedUser.role}.` 
         });
     } catch (error) {
         // Handle unique username constraint
@@ -32,7 +34,7 @@ router.post('/', async (req, res) => {
         if (error.code === 11000) { 
             return res.status(400).send({
                 registered: false, 
-                msg: `The username ${username} is already in use. Please choose another and try again.`
+                msg: `That username is already in use. Please choose another and try again.`
             });
         }
         return res.status(500).send({
@@ -62,22 +64,29 @@ router.get('/', async (req, res) => {
     };
 });
 
-router.get('/:username', async (req, res) => { 
-    const usernameSearch = req.params.username;
+router.post('/login', async (req, res) => { 
+    const { pin, username } = req.body;
 
     try {
-        const usernameMatch = await User.findOne({ username: usernameSearch });
+        const usernameMatch = await User.findOne({ username: username });
 
         if (!usernameMatch) {
             return res.status(400).send({ 
                 success: false, 
-                msg: `Username ${usernameSearch} not found. Try creating a new account`
+                msg: `Username ${username} not found. Try creating a new account`
             });
         }
-        
-        res.status(200).send({ 
-            success: true,
-            msg: usernameMatch });
+        const success = await usernameMatch.comparePin(pin);
+
+        if (success) {
+            res.status(200).send({ 
+                success: true,
+                msg: `Credentials for ${username} accepted. Login authorised` });
+        } else {
+            res.status(403).send({ 
+                success: false,
+                msg: `Credentials for ${username} not accepted. Login not authorised` });
+        }
 
     } catch (err) { 
         res.status(500).send({ success: false, msg: err.message });
