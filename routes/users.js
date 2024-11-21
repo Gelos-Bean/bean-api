@@ -1,7 +1,12 @@
 import { Router } from 'express';
-import User from "./../models/Users.js"
+import User from "./../models/Users.js";
+import jsonwebtoken from 'jsonwebtoken';
+
+import 'dotenv/config';
+const jwtSecret = process.env.JWT_SECRET;
 
 const router = Router(); 
+const jwt = jsonwebtoken;
 
 router.post('/', async (req, res) => {
     const { pin, username, name, role, image } = req.body;
@@ -28,13 +33,14 @@ router.post('/', async (req, res) => {
             registered: true, 
             msg: `User ${savedUser.name} has been added as ${savedUser.role}.` 
         });
+        
     } catch (error) {
         // Handle unique username constraint
         console.error('Error:', error.message);
         if (error.code === 11000) { 
             return res.status(400).send({
                 registered: false, 
-                msg: `That username is already in use. Please choose another and try again.`
+                msg: `Username already in use. Please choose another and try again.`
             });
         }
         return res.status(500).send({
@@ -43,6 +49,8 @@ router.post('/', async (req, res) => {
         });
     }
 });
+
+
 
 router.get('/', async (req, res) => { 
     try {
@@ -64,24 +72,37 @@ router.get('/', async (req, res) => {
     };
 });
 
+
+
 router.post('/login', async (req, res) => { 
     const { pin, username } = req.body;
 
     try {
-        const usernameMatch = await User.findOne({ username: username });
+        const user = await User.findOne({ username: username });
 
-        if (!usernameMatch) {
+        if (!user) {
             return res.status(400).send({ 
                 success: false, 
                 msg: `Username ${username} not found. Try creating a new account`
             });
         }
-        const success = await usernameMatch.comparePin(pin);
+        const success = await user.comparePin(pin);
 
         if (success) {
+            const token = jwt.sign(
+                { 
+                    role: user.role, 
+                    userId: user._id.toString(),
+                    name: user.name,
+                },
+                    jwtSecret, {
+                    expiresIn: '10m'
+                }
+            )
             res.status(200).send({ 
                 success: true,
-                msg: `Credentials for ${username} accepted. Login authorised` });
+                msg: `Credentials for ${username} accepted. Login authorised`, 
+                token: token});
         } else {
             res.status(403).send({ 
                 success: false,
