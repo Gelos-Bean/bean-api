@@ -36,7 +36,6 @@ router.post('/', async (req, res) => {
         
     } catch (error) {
         // Handle unique username constraint
-        console.error('Error:', error.message);
         if (error.code === 11000) { 
             return res.status(400).send({
                 registered: false, 
@@ -92,8 +91,8 @@ router.post('/login', async (req, res) => {
             const token = jwt.sign(
                 { 
                     role: user.role, 
-                    userId: user._id.toString(),
                     name: user.name,
+                    image: user.image,
                 },
                     jwtSecret, {
                     expiresIn: '10m'
