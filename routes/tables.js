@@ -144,7 +144,6 @@ router.put('/:id', async (req, res) => {
 
 
 router.delete('/:id', async (req, res) => {
-
     try { 
         const table = await Table.findById(req.params.id)
             .populate({
@@ -159,14 +158,24 @@ router.delete('/:id', async (req, res) => {
         const dateParts = newDate.split('/');
         const date = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`
 
-        let report = await SalesHistory.findOne({ date: date });
+        let report = await SalesHistory.findOne({ date: date })
+        .populate({
+            path: 'sales.products.item',
+            model: 'Product'})
+        .populate({
+            path: 'sales.products.selectedOptions',
+            model: 'Option'});
 
         if (!report) {
             report = new SalesHistory({ 
-                date: date
+                date: date,
+                sales: [],
+                totalFood: 0,
+                totalBev: 0,
+                total: 0,
             });
         }
-
+        console.log(report)
         const saleToAdd = {
             tableNo: table.tableNo,
             openedAt: table.openedAt,
@@ -177,20 +186,51 @@ router.delete('/:id', async (req, res) => {
         };
 
         report.sales.push(saleToAdd);
+        var newTotalFood = 0;
+        var newTotalBev = 0;
+        var newTotal = 0;
+        console.log(report)
+        report.sales.forEach(sale => {
+            sale.products.forEach(prod => {
+                if (!prod.item) {
+                    console.error("Product item not found:", prod);
+                    return; 
+                }
+        
+                const price = prod.item.price || 0; 
+                const quantity = prod.quantity || 1; 
+                const course = prod.item.course || "Other";
+        
+                if (course === "Beverage") {
 
-        const foodCourse = ["Starter", "Main", "Dessert"];
+                    if (prod.selectedOptions && Array.isArray(prod.selectedOptions)) {
+                        prod.selectedOptions.forEach(opt => {
+                            newTotalBev += opt.price || 0; 
+                        });
+                    }
 
-        report.total = report.sales.reduce((sum, sale) => sum + (sale.total || 0), 0);
-        report.totalFood = report.sales.reduce((sum, sale) => {
-            return sum + sale.products.reduce((foodSum, product) => {
-                return foodCourse.includes(product.item.course) ? foodSum + product.quantity * product.item.price : foodSum;
-            }, 0);
-        }, 0);
-        report.totalBev = report.sales.reduce((sum, sale) => {
-            return sum + sale.products.reduce((bevSum, product) => {
-                return product.item.course === 'Beverage' ? bevSum + product.quantity * product.item.price : bevSum;
-            }, 0);
-        }, 0);
+                    newTotalBev += price * quantity;
+                } else {
+
+                    if (prod.selectedOptions && Array.isArray(prod.selectedOptions)) {
+                        prod.selectedOptions.forEach(opt => {
+                            newTotalFood += opt.price || 0; 
+                        });
+                    }
+
+                    newTotalFood += price * quantity;
+                }
+            });
+        });
+        newTotal += (newTotalBev + newTotalFood)
+        console.log(`New bev: ${newTotalBev}`);
+        console.log(`New food: ${newTotalFood}`)
+        console.log(`New total: ${newTotal}`)
+
+
+        report.totalBev += newTotalBev;
+        report.totalFood += newTotalFood;
+        report.total += newTotal;
 
         const saveReport = await report.save();
 
