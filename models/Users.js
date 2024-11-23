@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 import bcrypt from 'bcrypt';
-import rolesConfig from '../config/user-roles.json' assert { type: 'json' }; 
+import rolesConfig from '../config/user-roles.json' with { type: 'json' }; 
 
 const roles = rolesConfig.roles;
 
