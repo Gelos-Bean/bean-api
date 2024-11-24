@@ -29,9 +29,9 @@ router.post('/', async (req, res) => {
 
         const savedUser = await registeredUser.save();
 
-        return res.status(201).send({ 
-            registered: true, 
-            msg: `User ${savedUser.name} has been added as ${savedUser.role}.` 
+        return res.status(200).send({ 
+            success: true, 
+            msg: `User ${savedUser.username} has been added as ${savedUser.role}.` 
         });
         
     } catch (error) {
@@ -48,8 +48,6 @@ router.post('/', async (req, res) => {
         });
     }
 });
-
-
 
 router.get('/', async (req, res) => { 
     try {
@@ -97,6 +95,7 @@ router.post('/login', async (req, res) => {
                     jwtSecret, {
                     expiresIn: '10m'
                 }
+                
             )
             res.status(200).send({ 
                 success: true,
@@ -112,5 +111,7 @@ router.post('/login', async (req, res) => {
         res.status(500).send({ success: false, msg: err.message });
     };
 });
+
+
 
 export default router; 
