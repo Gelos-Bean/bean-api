@@ -233,8 +233,8 @@ router.delete('/:id', async (req, res) => {
         report.total += newTotal;
 
         report.totalBev = report.totalBev.toFixed(2);
-        report.totalFood += report.totalFood.toFixed(2);
-        report.total += report.total.toFixed(2);
+        report.totalFood = report.totalFood.toFixed(2);
+        report.total = report.total.toFixed(2);
 
         const saveReport = await report.save();
 
