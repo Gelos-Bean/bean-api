@@ -175,7 +175,6 @@ router.delete('/:id', async (req, res) => {
                 total: 0,
             });
         }
-        console.log(report)
         const saleToAdd = {
             tableNo: table.tableNo,
             openedAt: table.openedAt,
@@ -189,7 +188,6 @@ router.delete('/:id', async (req, res) => {
         var newTotalFood = 0;
         var newTotalBev = 0;
         var newTotal = 0;
-        console.log(report)
         report.sales.forEach(sale => {
             sale.products.forEach(prod => {
                 if (!prod.item) {
@@ -223,10 +221,6 @@ router.delete('/:id', async (req, res) => {
             });
         });
         newTotal += (newTotalBev + newTotalFood)
-        console.log(`New bev: ${newTotalBev}`);
-        console.log(`New food: ${newTotalFood}`)
-        console.log(`New total: ${newTotal}`)
-
 
         report.totalBev += newTotalBev;
         report.totalFood += newTotalFood;
@@ -244,8 +238,6 @@ router.delete('/:id', async (req, res) => {
                 msg: 'Could not save sale to sales history, try again later',
             })
         }
-
-        console.log(`sales history saved`);
 
 
         //Once sales history saved, delete table
