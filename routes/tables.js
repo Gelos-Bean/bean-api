@@ -25,7 +25,6 @@ router.post('/', async (req, res) => {
         const newTable = new Table({
             tableNo: tableNo,
             pax: pax,
-            limit: limit ? limit : '',
             total: total ? total : 0
         });
         
@@ -62,8 +61,8 @@ router.get('/', async (req, res) => {
                 model: 'Option'}
             );
 
-        if (!allTables) {
-            return res.status(400).send({ 
+        if (allTables.length === 0) {
+            return res.status(404).send({ 
                 success: false, 
                 msg: 'No tables found' 
             });
@@ -102,7 +101,7 @@ router.get('/:tableNo', async (req, res) => {
         if (!findTable) {
             return res.status(404).send({ 
                 success: false, 
-                msg: 'Order not found' 
+                msg: 'Table not found' 
             });
         }
 
@@ -159,12 +158,12 @@ router.delete('/:id', async (req, res) => {
         const date = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`
 
         let report = await SalesHistory.findOne({ date: date })
-        .populate({
-            path: 'sales.products.item',
-            model: 'Product'})
-        .populate({
-            path: 'sales.products.selectedOptions',
-            model: 'Option'});
+            .populate({
+                path: 'sales.products.item',
+                model: 'Product'})
+            .populate({
+                path: 'sales.products.selectedOptions',
+                model: 'Option'});
 
         if (!report) {
             report = new SalesHistory({ 
@@ -175,12 +174,10 @@ router.delete('/:id', async (req, res) => {
                 total: 0,
             });
         }
-        console.log(report)
         const saleToAdd = {
             tableNo: table.tableNo,
             openedAt: table.openedAt,
             pax: table.pax,
-            limit: Number(table.limit),
             products: table.products,
             total: table.total
         };
@@ -189,7 +186,6 @@ router.delete('/:id', async (req, res) => {
         var newTotalFood = 0;
         var newTotalBev = 0;
         var newTotal = 0;
-        console.log(report)
         report.sales.forEach(sale => {
             sale.products.forEach(prod => {
                 if (!prod.item) {
@@ -222,12 +218,7 @@ router.delete('/:id', async (req, res) => {
                 }
             });
         });
-        newTotal += (newTotalBev + newTotalFood)
-        console.log(`New bev: ${newTotalBev}`);
-        console.log(`New food: ${newTotalFood}`)
-        console.log(`New total: ${newTotal}`)
-
-
+        newTotal += (newTotalBev + newTotalFood);
         report.totalBev += newTotalBev;
         report.totalFood += newTotalFood;
         report.total += newTotal;
@@ -244,10 +235,6 @@ router.delete('/:id', async (req, res) => {
                 msg: 'Could not save sale to sales history, try again later',
             })
         }
-
-        console.log(`sales history saved`);
-
-
         //Once sales history saved, delete table
         const deleteTable = await Table.findByIdAndDelete(req.params.id);
 
