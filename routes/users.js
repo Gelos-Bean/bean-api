@@ -66,9 +66,50 @@ router.get('/', async (req, res) => {
 
     } catch (err) { 
         res.status(500).send({ success: false, msg: err.message });
+        if (error.code === 11000) { 
+            return res.status(400).send({
+                registered: false, 
+                msg: `Username already in use. Please choose another and try again.`
+            });
+        }
     };
+    
 });
 
+router.put('/:id', async (req, res) => {
+    try {
+        const { pin, username, name, role, image } = req.body;
+
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).send({
+                success: false,
+                msg: 'User not found'
+            });
+        }
+
+        user.username = username || user.username;
+        user.name = name || user.name;
+        user.pin = pin || user.pin;
+        user.role = role || user.role;
+        user.image = image || user.image;
+
+        const updatedUser = await user.save();
+
+        res.status(200).send({
+            success: true,
+            msg: `User ${updatedUser.username} updated`
+        });
+    } catch (err) {
+        if (err.name === "CastError") {
+            return res.status(400).send({
+                success: false,
+                msg: 'Invalid user ID'
+            });
+        }
+        res.status(500).send({ success: false, msg: err.message });
+    }
+});
 
 
 router.post('/login', async (req, res) => { 
@@ -112,6 +153,26 @@ router.post('/login', async (req, res) => {
     };
 });
 
+router.delete('/:id', async (req, res) => { 
 
+    try { 
+        const deleteUser = await User.findByIdAndDelete(req.params.id);
+
+        res.status(200).send({ 
+            success: true,
+            msg: `${deleteUser.username} deleted successfully`
+        });
+
+    } catch (err) {
+
+        if(err.name === "CastError"){
+            return res.status(400).send({ 
+                success: false, 
+                msg: 'User not found' });
+        }
+
+        res.status(500).send({ success: false, msg: err.message });
+    }
+})
 
 export default router; 

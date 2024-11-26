@@ -31,6 +31,16 @@ UserSchema.pre('save', async function(next) {
     }
 });
 
+UserSchema.methods.updatePin = async function(pin) {
+    try {
+        const salt = await bcrypt.genSalt(10);
+        hashedPin = await bcrypt.hash(pin.toString(), salt);
+        return hashedPin
+    } catch (err) {
+        throw new Error (err);
+    }
+}
+
 UserSchema.methods.comparePin = async function(inputPin) {
     try { 
         return await bcrypt.compare(inputPin.toString(), this.pin.toString());
