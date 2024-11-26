@@ -219,11 +219,6 @@ router.delete('/:id', async (req, res) => {
             });
         });
         newTotal += (newTotalBev + newTotalFood)
-        console.log(`New bev: ${newTotalBev}`);
-        console.log(`New food: ${newTotalFood}`)
-        console.log(`New total: ${newTotal}`)
-
-
         report.totalBev += newTotalBev;
         report.totalFood += newTotalFood;
         report.total += newTotal;
@@ -240,10 +235,6 @@ router.delete('/:id', async (req, res) => {
                 msg: 'Could not save sale to sales history, try again later',
             })
         }
-
-        console.log(`sales history saved`);
-
-
         //Once sales history saved, delete table
         const deleteTable = await Table.findByIdAndDelete(req.params.id);
 

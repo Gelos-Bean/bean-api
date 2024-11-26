@@ -9,10 +9,15 @@ router.post('/', async (req, res) => {
 
     try {
         const { table, products, comment, total } = req.body;
-        const tableId = await Table.findById(table._id);
+        if (!table || !products || products.length === 0) {
+            return res.status(400).send({ success: false, 
+                msg: 'Invalid input: Missing or incorrect fields.' });
+        }
+       
+        const tableId = await Table.findById(table);
        
         const newOrder = new Order({
-            table: tableId,
+            table: tableId._id,
             products: products,
             comment: comment,
             total: total
@@ -20,7 +25,9 @@ router.post('/', async (req, res) => {
 
         await newOrder.save();
 
-        tableId.products.push(...products);
+        for (let product of products) {
+            tableId.products.push(product);
+        }
         tableId.total += total;
         await tableId.save();
 
@@ -30,9 +37,6 @@ router.post('/', async (req, res) => {
         });
 
     } catch (err) {
-        if (err.name === "ValidationError") {
-            return res.status(400).send({ success: false, msg: err.message });
-        }
         res.status(500).send({ success: false, msg: err.message });
     }
 });
@@ -40,7 +44,7 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => { 
 
     try {
-        const allOrders = await Order.find({})
+        const orders = await Order.find({})
             .populate({
                 path: 'table',
                 model: 'Table'})
@@ -53,7 +57,7 @@ router.get('/', async (req, res) => {
                 model: 'Option'
             })
 
-        if (!allOrders) {
+        if (!orders || orders.length === 0) {
             return res.status(400).send({ 
                 success: false, 
                 msg: 'No orders found' });
@@ -61,7 +65,7 @@ router.get('/', async (req, res) => {
         
         res.status(200).send({
             success: true, 
-            msg: allOrders
+            msg: orders
         });
 
     } catch (err) { 
@@ -86,7 +90,7 @@ router.get('/:id', async (req, res) => {
                 model: 'Option'
             });
 
-        if(!findOrder){
+        if(!findOrder || findOrder.length === 0){
             return res.status(400).send({ 
                 success: false, 
                 msg: 'Order not found' 
@@ -147,10 +151,6 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
 
     try { 
-
-// ----> Stretch TO DO: send item to sales history before deleting
-// ----> BK note on the above: this should go in delete tables, not orders
-
         const deleteOrder = await Order.findByIdAndDelete(req.params.id);
 
         res.status(200).send({

@@ -9,6 +9,8 @@ const options = {
     day: 'numeric',
     };
 
+const isValidDateFormat = (id) => /^\d{4}-\d{2}-\d{2}$/.test(id);
+
 router.get('/today', async (req, res) => {
     try{ 
         const newDate = new Date().toLocaleString('en-AU', options);
@@ -17,11 +19,11 @@ router.get('/today', async (req, res) => {
 
         const report = await SalesHistory.findOne({ date })
         if (report) {
-            res.status(200).send({ 
+            return res.status(200).send({ 
                 success: true, 
+                newReport: false,
                 msg: report
               });
-              return;
         };
 
         const newReport = new SalesHistory({
@@ -36,7 +38,8 @@ router.get('/today', async (req, res) => {
 
         if(saveReport) {
             res.status(200).send({
-                success: false,
+                success: true,
+                newReport: true,
                 msg: `New empty sales reported created for ${date}`,
             });
         }
@@ -52,7 +55,6 @@ router.get('/today', async (req, res) => {
 
 router.get('/:date', async (req, res) => {
     try {
-        debugger;
       // Date must be ensure it's passed as YYYY-MM-DD
       const date = req.params.date;
 
@@ -100,7 +102,7 @@ router.get('/', async (req, res) => {
                 path: 'sales.products.selectedOptions',
                 model: 'Option'}
             );
-        if(!reports) {
+        if(!reports || reports.length === 0) {
             return res.status(400).send({
                 success: false,
                 msg: 'No sales reports found'
@@ -117,7 +119,8 @@ router.get('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     try {
-        const saleToAdd = req.body.sales; 
+        const saleToAdd = req.body.sales;
+
         if (!saleToAdd) {
             return res.status(400).send({
                 success: false,
@@ -126,7 +129,7 @@ router.put('/:id', async (req, res) => {
         }
 
         const report = await SalesHistory.findById(req.params.id);
-        if (!report) {
+        if (!report || report.length === 0) {
             return res.status(404).send({
                 success: false,
                 msg: 'Report not found.'
@@ -156,59 +159,21 @@ router.put('/:id', async (req, res) => {
             report: updatedReport
         });
     } catch (err) {
-        console.error(err);
         res.status(500).send({
             success: false,
-            msg: 'An error occurred while updating the report.'
+            msg: 'An error occurred while updating the report. ' + err
         });
     }
 });
-
-
-// router.put('/:id', async (req, res) => { 
-//     try { 
-//         const saleToAdd = req.body.sales;
-
-//         if (!saleToAdd) {
-//             return res.status(400).send({
-//                 success: false,
-//                 msg: 'No sale data provided.'
-//             });
-//         }
-
-//         const updatedReport = await SalesHistory.findByIdAndUpdate(
-//             req.params.id,
-//             { $push: { sales: saleToAdd } },
-//             { new: true } 
-//         );
-
-//         res.status(200).send({
-//             success: true,
-//             msg: 'Sale added successfully.',
-//             report: updatedReport
-//         });
-
-//     } catch (err) { 
-//         if(err.name === "CastError"){
-//             return res.status(400).send({ 
-//                 success: false, 
-//                 msg: 'Sales report not found' 
-//             });
-//         }
-//         res.status(500).send({ success: false, msg: err.message });
-//     };
-// })
 
 
 router.delete('/:id', async (req, res) => {
 
     try { 
         const deleteReport = await SalesHistory.findByIdAndDelete(req.params.id);
-
-        const date = deleteReport.date;
         res.status(200).send({
             success: true,
-            msg: `Sales report for ${date.toISOString().split('T')[0]} deleted successfully`
+            msg: `Sales report for ${deleteReport.date.split('T')[0]} deleted successfully`
         });
 
     } catch (err) { 
