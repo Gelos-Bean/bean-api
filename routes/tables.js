@@ -12,7 +12,7 @@ const options = {
 
 router.post('/', async (req, res) => {
     try{ 
-        const { tableNo, pax, limit, total } = req.body;
+        const { tableNo, pax, total } = req.body;
 
         const existingTable = await Table.findOne({ tableNo });
         if (existingTable) {
@@ -25,7 +25,6 @@ router.post('/', async (req, res) => {
         const newTable = new Table({
             tableNo: tableNo,
             pax: pax,
-            limit: limit ? limit : '',
             total: total ? total : 0
         });
         
@@ -63,7 +62,7 @@ router.get('/', async (req, res) => {
             );
 
         if (!allTables) {
-            return res.status(400).send({ 
+            return res.status(404).send({ 
                 success: false, 
                 msg: 'No tables found' 
             });
@@ -102,7 +101,7 @@ router.get('/:tableNo', async (req, res) => {
         if (!findTable) {
             return res.status(404).send({ 
                 success: false, 
-                msg: 'Order not found' 
+                msg: 'Table not found' 
             });
         }
 
@@ -120,12 +119,14 @@ router.get('/:tableNo', async (req, res) => {
 router.put('/:id', async (req, res) => { 
 
     try { 
-        const updateTable = await Table.findByIdAndUpdate(
-            req.params.id, 
-            req.body, 
-            { new: true }
-        );
-
+        const updateTable = await Table.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        
+        if(!updateTable) {
+            return res.status(400).send({
+                success: false, 
+                msg: "Could not find table"
+            });
+        }
         res.status(200).send({
             success: true,
             msg: `Table ${updateTable.tableNo} updated`
@@ -159,12 +160,12 @@ router.delete('/:id', async (req, res) => {
         const date = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`
 
         let report = await SalesHistory.findOne({ date: date })
-        .populate({
-            path: 'sales.products.item',
-            model: 'Product'})
-        .populate({
-            path: 'sales.products.selectedOptions',
-            model: 'Option'});
+            .populate({
+                path: 'sales.products.item',
+                model: 'Product'})
+            .populate({
+                path: 'sales.products.selectedOptions',
+                model: 'Option'});
 
         if (!report) {
             report = new SalesHistory({ 
@@ -179,7 +180,6 @@ router.delete('/:id', async (req, res) => {
             tableNo: table.tableNo,
             openedAt: table.openedAt,
             pax: table.pax,
-            limit: Number(table.limit),
             products: table.products,
             total: table.total
         };
@@ -221,7 +221,6 @@ router.delete('/:id', async (req, res) => {
             });
         });
         newTotal += (newTotalBev + newTotalFood)
-
         report.totalBev += newTotalBev;
         report.totalFood += newTotalFood;
         report.total += newTotal;
@@ -238,8 +237,6 @@ router.delete('/:id', async (req, res) => {
                 msg: 'Could not save sale to sales history, try again later',
             })
         }
-
-
         //Once sales history saved, delete table
         const deleteTable = await Table.findByIdAndDelete(req.params.id);
 

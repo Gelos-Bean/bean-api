@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const {Schema, SchemaTypes, model} = mongoose;
 
 const tableSchema = new Schema({
-    tableNo: { type: Number, required: true,  unique: true }, //Must also handle unique field validation in routes or frontend
+    tableNo: { type: Number, required: true,  unique: true }, 
     openedAt: { 
         type: Date, 
         default: Date.now 

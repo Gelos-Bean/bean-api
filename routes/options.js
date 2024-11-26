@@ -61,8 +61,8 @@ router.get('/:name', async (req, res) => {
         const findOption = await Option.find({
             name: { $regex: new RegExp(optionNameURI, "i") }
             });
-
-        if(!findOption){
+            
+        if(findOption.length === 0){
             return res.status(400).send({ 
                 success: false, 
                 msg: 'Option not found' 
