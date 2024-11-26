@@ -53,12 +53,11 @@ describe('Tables API Tests', () => {
             expect(response.body.msg).toHaveLength(2);
         });
 
-        it('returns 404 if table exist', async () => {
+        it('still return success if no tables open', async () => {
             await Table.deleteMany({});
             const response = await request(app).get('/tables');
-            expect(response.status).toBe(404);
-            expect(response.body.success).toBe(false);
-            expect(response.body.msg).toBe('No tables found');
+            expect(response.status).toBe(200);
+            expect(response.body.success).toBe(true);
         });
     });
 

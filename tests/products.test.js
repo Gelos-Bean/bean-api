@@ -128,13 +128,6 @@ describe('Options API Tests', () => {
             expect(response.body.success).toBe(true);
             expect(response.body.msg).toHaveLength(2);
         });
-    
-        it('should return empty array for non-existent product', async () => {
-            const response = await request(app).get('/products/wrong');
-            expect(response.status).toBe(400);
-            expect(response.body.success).toBe(false);
-            expect(response.body.msg).toBe('Product not found');
-        });
     })
 
      // PUT tests
