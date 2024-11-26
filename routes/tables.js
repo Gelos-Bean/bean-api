@@ -12,7 +12,7 @@ const options = {
 
 router.post('/', async (req, res) => {
     try{ 
-        const { tableNo, pax, limit, total } = req.body;
+        const { tableNo, pax, total } = req.body;
 
         const existingTable = await Table.findOne({ tableNo });
         if (existingTable) {
@@ -61,7 +61,7 @@ router.get('/', async (req, res) => {
                 model: 'Option'}
             );
 
-        if (allTables.length === 0) {
+        if (!allTables) {
             return res.status(404).send({ 
                 success: false, 
                 msg: 'No tables found' 
@@ -119,12 +119,14 @@ router.get('/:tableNo', async (req, res) => {
 router.put('/:id', async (req, res) => { 
 
     try { 
-        const updateTable = await Table.findByIdAndUpdate(
-            req.params.id, 
-            req.body, 
-            { new: true }
-        );
-
+        const updateTable = await Table.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        
+        if(!updateTable) {
+            return res.status(400).send({
+                success: false, 
+                msg: "Could not find table"
+            });
+        }
         res.status(200).send({
             success: true,
             msg: `Table ${updateTable.tableNo} updated`

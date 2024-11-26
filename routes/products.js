@@ -64,7 +64,7 @@ router.get('/:name', async (req, res) => {
             name: { $regex: new RegExp(prodNameURI, "i") }
         }).populate('options');
 
-        if(findProduct.length === 0){
+        if(!findProduct){
             return res.status(400).send({ 
                 success: false, 
                 msg: 'Product not found' 
