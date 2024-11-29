@@ -5,12 +5,11 @@ import Router from './routes/router.js';
 import cors from 'cors';
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use(cors());
 
-//env const used for better readibility with dotenv library
 const env = process.env;
 
 mongoose.connect(env.MONGO_URI)
